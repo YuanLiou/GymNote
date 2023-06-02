@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation(libs.core.ktx)
+    implementation(libs.collections.immutable)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">GymNote</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">中文方形 Wear App ,\n哈囉, %1$s!</string>
+    <string name="category_basic_shoulders">肩</string>
+    <string name="category_basic_triceps">三頭</string>
+    <string name="category_basic_biceps">二頭</string>
+    <string name="category_basic_chest">胸</string>
+    <string name="category_basic_back">背</string>
+    <string name="category_basic_legs">腿</string>
+    <string name="category_basic_abs">腹部</string>
+    <string name="category_basic_cardio">有氧</string>
+</resources>
