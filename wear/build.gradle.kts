@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ktlintKotlinter)
+    alias(libs.plugins.kotlinSymbolProcessing)
 }
 
 android {
@@ -30,6 +31,16 @@ android {
             )
         }
     }
+
+    applicationVariants.all {
+        val variantName = name
+        sourceSets {
+            getByName("main") {
+                java.srcDir(File("build/generated/ksp/$variantName/kotlin"))
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -64,7 +75,16 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
+
+    // kotlinx
     implementation(libs.collections.immutable)
+
+    // koin
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.annotations)
+    ksp(libs.koin.ksp.compiler)
+
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)

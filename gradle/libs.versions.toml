@@ -17,9 +17,14 @@ compose-material = "1.1.2"
 compose-foundation = "1.1.2"
 lifecycle-runtime-ktx = "2.6.1"
 activity-compose = "1.7.2"
+ksp = "1.8.21-1.0.11"
 
 # kotlinx
 collections-immutable = "0.3.5"
+
+# koin
+koin = "3.4.1"
+koin-annotation = "1.2.1"
 
 # code check
 kotlinter = "3.15.0"
@@ -51,11 +56,18 @@ activity-compose = { group = "androidx.activity", name = "activity-compose", ver
 # kotlinx
 collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "collections-immutable" }
 
+# koin
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin-annotation" }
+koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koin-annotation" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+kotlinSymbolProcessing = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 # code check
 ktlintKotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
