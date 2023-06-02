@@ -38,7 +38,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":commonMain"))
+    implementation(project(":shared"))
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.play.services.wearable)
