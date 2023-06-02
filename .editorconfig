@@ -1,5 +1,9 @@
 root = true
 
 [*.{kt,kts}]
+ktlint_code_style = android
 ktlint_standard_final-newline = disabled
 ktlint_standard_no-wildcard-imports = disabled
+ktlint_standard_trailing-comma-on-call-site = disabled
+ktlint_standard_trailing-comma-on-declaration-site = disabled
+ktlint_standard_import-ordering = disabled
