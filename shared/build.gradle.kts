@@ -81,6 +81,14 @@ allprojects {
     tasks.withType(KaptGenerateStubsTask::class.java).configureEach {
         kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
+    tasks.lintKotlinCommonMain {
+        exclude { it.file.path.contains("generated/")}
+    }
+
+    tasks.formatKotlinCommonMain {
+        exclude { it.file.path.contains("generated/")}
+    }
 }
 
 dependencies {

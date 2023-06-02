@@ -15,11 +15,7 @@ class GymNoteWearApplication : Application() {
         startKoin {
             androidContext(this@GymNoteWearApplication)
             androidLogger()
-            modules(
-                WearModule().module +
-                RepositoryModule().module +
-                UseCaseModule().module
-            )
+            modules(WearModule().module + RepositoryModule().module + UseCaseModule().module)
         }
     }
 }
