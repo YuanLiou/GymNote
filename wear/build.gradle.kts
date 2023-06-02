@@ -5,15 +5,15 @@ plugins {
 }
 
 android {
-    namespace = "com.rayliu.gymnote"
-    compileSdk = 33
+    namespace = AppSettings.applicationId
+    compileSdk = AppSettings.compileSdk
 
     defaultConfig {
-        applicationId = "com.rayliu.gymnote"
-        minSdk = 25
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = AppSettings.applicationId
+        minSdk = AppSettings.minSdk
+        targetSdk = AppSettings.targetSdk
+        versionCode = AppSettings.wearVersionCode
+        versionName = AppSettings.wearVersionName
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -40,7 +40,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.7"
+        kotlinCompilerExtensionVersion = AppSettings.kotlinCompilerExtensionVersion
     }
     packaging {
         resources {
