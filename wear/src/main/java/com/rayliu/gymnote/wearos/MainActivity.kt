@@ -1,4 +1,4 @@
-package com.rayliu.gymnote.presentation
+package com.rayliu.gymnote.wearos
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -22,23 +22,32 @@ import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.compose.material.scrollAway
-import com.rayliu.commonmain.domain.repository.CategoryRepositoryImpl
-import com.rayliu.commonmain.domain.usecase.GetCategoryUseCase
-import com.rayliu.gymnote.presentation.theme.GymNoteTheme
-import com.rayliu.gymnote.presentation.theme.PreviewConstants
+import com.rayliu.commonmain.domain.model.Category
+import com.rayliu.gymnote.wearos.categorylist.CategoryListViewModel
+import com.rayliu.gymnote.wearos.theme.GymNoteTheme
+import com.rayliu.gymnote.wearos.theme.PreviewConstants
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: CategoryListViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WearApp("Android")
+            WearApp(
+                categories = viewModel.provideCategories()
+            )
         }
     }
 }
 
 @Composable
-fun WearApp(greetingName: String) {
-    val getCategory = GetCategoryUseCase(CategoryRepositoryImpl())
+fun WearApp(
+    categories: ImmutableList<Category>
+) {
     GymNoteTheme {
         val listState = rememberScalingLazyListState()
         Scaffold(
@@ -60,8 +69,7 @@ fun WearApp(greetingName: String) {
                 autoCentering = AutoCenteringParams(itemIndex = 0),
                 state = listState
             ) {
-                val listItem = getCategory()
-                listItem.forEach {
+                categories.forEach {
                     item { CategoryItem(categoryName = it.name, contentModifier) }
                 }
             }
@@ -86,7 +94,7 @@ fun CategoryItem(
 @Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
-    WearApp("Preview Android")
+    WearApp(listOf<Category>().toImmutableList())
 }
 
 @Preview(

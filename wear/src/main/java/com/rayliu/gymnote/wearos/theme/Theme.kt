@@ -1,4 +1,4 @@
-package com.rayliu.gymnote.presentation.theme
+package com.rayliu.gymnote.wearos.theme
 
 import androidx.compose.runtime.Composable
 import androidx.wear.compose.material.MaterialTheme
@@ -12,6 +12,7 @@ fun GymNoteTheme(
      * See: https://developer.android.com/jetpack/compose/designsystems/custom
      */
     MaterialTheme(
-        content = content
+        content = content,
+        colors = WearAppColorPalette
     )
 }
