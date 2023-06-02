@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "GymNote"
 include(":mobile")
 include(":wear")
+include(":commonMain")

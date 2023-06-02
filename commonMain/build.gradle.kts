@@ -1,21 +1,17 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
 }
 
 android {
-    namespace = "com.rayliu.gymnote"
+    namespace = "com.rayliu.commonmain"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.rayliu.gymnote"
         minSdk = 25
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -37,14 +33,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":commonMain"))
     implementation(libs.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.play.services.wearable)
-    implementation(libs.material)
-    implementation(libs.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    wearApp(project(":wear"))
 }
