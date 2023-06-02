@@ -51,7 +51,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":commonMain"))
+    implementation(project(":shared"))
     implementation(libs.core.ktx)
     implementation(libs.play.services.wearable)
     implementation(libs.percentlayout)
