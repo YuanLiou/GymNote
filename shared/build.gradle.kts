@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -9,7 +12,7 @@ kotlin {
     android {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = JavaVersion.VERSION_11.toString()
             }
         }
     }
@@ -67,6 +70,16 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+allprojects {
+    tasks.withType(KotlinCompile::class.java).configureEach {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
+    tasks.withType(KaptGenerateStubsTask::class.java).configureEach {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }
 

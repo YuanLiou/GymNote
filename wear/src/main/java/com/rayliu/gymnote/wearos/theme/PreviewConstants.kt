@@ -1,4 +1,4 @@
-package com.rayliu.gymnote.presentation.theme
+package com.rayliu.gymnote.wearos.theme
 
 import android.content.res.Configuration
 

@@ -1,7 +1,9 @@
 package com.rayliu.commonmain.domain.repository
 
 import com.rayliu.commonmain.domain.model.Category
+import org.koin.core.annotation.Factory
 
+@Factory
 class CategoryRepositoryImpl : CategoryRepository {
     override fun provideBasicCategories(): List<Category> {
         return generateBasicCategories()
