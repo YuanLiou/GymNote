@@ -1,0 +1,26 @@
+CREATE TABLE Category (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+-- Initial values for the category table
+INSERT INTO Category
+VALUES (0, "Shoulders");
+INSERT INTO Category
+VALUES (1, "Triceps");
+INSERT INTO Category
+VALUES (2, "Biceps");
+INSERT INTO Category
+VALUES (3, "Chest");
+INSERT INTO Category
+VALUES (4, "Back");
+INSERT INTO Category
+VALUES (5, "Legs");
+INSERT INTO Category
+VALUES (6, "Abs");
+INSERT INTO Category
+VALUES (7, "Cardio");
+
+-- Methods
+getAllCategories:
+SELECT * FROM Category;

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,6 +55,8 @@ fun WearApp(
                 PositionIndicator(scalingLazyListState = listState)
             }
         ) {
+            val items = viewModel.provideCategories()
+                .collectAsState(initial = emptyList()).value
             val contentModifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
@@ -62,7 +65,7 @@ fun WearApp(
                 autoCentering = AutoCenteringParams(itemIndex = 0),
                 state = listState
             ) {
-                viewModel.provideCategories().forEach {
+                items.forEach {
                     item { CategoryItem(categoryName = it.name, contentModifier) }
                 }
             }

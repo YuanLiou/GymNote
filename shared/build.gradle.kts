@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.ktlintKotlinter)
     alias(libs.plugins.kotlinSymbolProcessing)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -21,6 +22,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.collections.immutable)
+                implementation(libs.sqldelight.runtime)
+                implementation(libs.sqldelight.coroutineextension)
                 api(libs.koin.core)
                 api(libs.koin.annotations)
             }
@@ -31,7 +34,13 @@ kotlin {
             }
         }
         val androidMain by getting {
-            dependsOn(commonMain)
+            dependencies {
+                implementation(libs.collections.immutable)
+                implementation(libs.sqldelight.androiddriver)
+                api(libs.koin.core)
+                api(libs.koin.android)
+                api(libs.koin.annotations)
+            }
         }
         val androidUnitTest by getting {
             dependencies {
@@ -94,4 +103,12 @@ allprojects {
 dependencies {
     add("kspCommonMainMetadata", libs.koin.ksp.compiler)
     add("kspAndroid", libs.koin.ksp.compiler)
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.rayliu.commonmain.data.database")
+        }
+    }
 }
