@@ -11,7 +11,7 @@ import org.koin.core.annotation.Factory
 @Factory
 class CategoryLocalDataSourceImpl(appDatabase: AppDatabase) : CategoryLocalDataSource {
 
-    private val queries = appDatabase.appDatabaseQueries
+    private val queries = appDatabase.categoryQueries
 
     override fun getCategories(): Flow<List<Category>> {
         return queries.getAllCategories().asFlow().mapToList(Dispatchers.Default)
