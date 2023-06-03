@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.ktlintKotlinter)
     alias(libs.plugins.kotlinSymbolProcessing)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -21,6 +22,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.collections.immutable)
+                implementation(libs.sqldelight.runtime)
                 api(libs.koin.core)
                 api(libs.koin.annotations)
             }
@@ -31,7 +33,12 @@ kotlin {
             }
         }
         val androidMain by getting {
-            dependsOn(commonMain)
+            dependencies {
+                implementation(libs.collections.immutable)
+                implementation(libs.sqldelight.androiddriver)
+                api(libs.koin.core)
+                api(libs.koin.annotations)
+            }
         }
         val androidUnitTest by getting {
             dependencies {
