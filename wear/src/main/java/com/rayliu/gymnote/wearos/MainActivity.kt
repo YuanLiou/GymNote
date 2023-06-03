@@ -22,31 +22,24 @@ import androidx.wear.compose.material.Vignette
 import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.compose.material.scrollAway
-import com.rayliu.commonmain.domain.model.Category
 import com.rayliu.gymnote.wearos.categorylist.CategoryListViewModel
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
 import com.rayliu.gymnote.wearos.theme.PreviewConstants
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.toImmutableList
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
-
-    private val viewModel: CategoryListViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WearApp(
-                categories = viewModel.provideCategories()
-            )
+            WearApp()
         }
     }
 }
 
 @Composable
 fun WearApp(
-    categories: ImmutableList<Category>
+    viewModel: CategoryListViewModel = koinViewModel()
 ) {
     GymNoteTheme {
         val listState = rememberScalingLazyListState()
@@ -69,7 +62,7 @@ fun WearApp(
                 autoCentering = AutoCenteringParams(itemIndex = 0),
                 state = listState
             ) {
-                categories.forEach {
+                viewModel.provideCategories().forEach {
                     item { CategoryItem(categoryName = it.name, contentModifier) }
                 }
             }
@@ -94,7 +87,7 @@ fun CategoryItem(
 @Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
-    WearApp(listOf<Category>().toImmutableList())
+    WearApp()
 }
 
 @Preview(
