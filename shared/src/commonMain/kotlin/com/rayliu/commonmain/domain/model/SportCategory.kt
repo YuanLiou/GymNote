@@ -1,6 +1,6 @@
 package com.rayliu.commonmain.domain.model
 
-data class Category(
+data class SportCategory(
     val id: Int,
     val name: String
 )

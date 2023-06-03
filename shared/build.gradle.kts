@@ -23,6 +23,7 @@ kotlin {
             dependencies {
                 implementation(libs.collections.immutable)
                 implementation(libs.sqldelight.runtime)
+                implementation(libs.sqldelight.coroutineextension)
                 api(libs.koin.core)
                 api(libs.koin.annotations)
             }
@@ -37,6 +38,7 @@ kotlin {
                 implementation(libs.collections.immutable)
                 implementation(libs.sqldelight.androiddriver)
                 api(libs.koin.core)
+                api(libs.koin.android)
                 api(libs.koin.annotations)
             }
         }
@@ -101,4 +103,12 @@ allprojects {
 dependencies {
     add("kspCommonMainMetadata", libs.koin.ksp.compiler)
     add("kspAndroid", libs.koin.ksp.compiler)
+}
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.rayliu.commonmain.data.database")
+        }
+    }
 }

@@ -1,48 +1,20 @@
 package com.rayliu.commonmain.domain.repository
 
-import com.rayliu.commonmain.domain.model.Category
+import com.rayliu.commonmain.data.dao.CategoryLocalDataSource
+import com.rayliu.commonmain.data.mapper.CategoryListMapper
+import com.rayliu.commonmain.domain.model.SportCategory
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
 
 @Factory
-class CategoryRepositoryImpl : CategoryRepository {
-    override fun provideBasicCategories(): List<Category> {
-        return generateBasicCategories()
-    }
-
-    private fun generateBasicCategories(): List<Category> {
-        return listOf(
-            Category(
-                id = 0,
-                name = "Shoulders"
-            ),
-            Category(
-                id = 1,
-                name = "Triceps"
-            ),
-            Category(
-                id = 2,
-                name = "Biceps"
-            ),
-            Category(
-                id = 3,
-                name = "Chest"
-            ),
-            Category(
-                id = 4,
-                name = "Back"
-            ),
-            Category(
-                id = 5,
-                name = "Legs"
-            ),
-            Category(
-                id = 6,
-                name = "Abs"
-            ),
-            Category(
-                id = 7,
-                name = "Cardio"
-            )
-        )
+class CategoryRepositoryImpl(
+    private val localDataSource: CategoryLocalDataSource,
+    private val categoryListMapper: CategoryListMapper
+) : CategoryRepository {
+    override fun provideBasicCategories(): Flow<List<SportCategory>> {
+        return localDataSource.getCategories().map {
+            categoryListMapper.map(it)
+        }
     }
 }

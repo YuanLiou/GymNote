@@ -1,7 +1,9 @@
-package com.rayliu.commonmain.data.mapper
+package com.rayliu.commonmain.data.mapper.basic
 
 interface NullableInputListMapper<I, O> : Mapper<List<I>?, List<O>>
 
+/*
+sample implementation
 class NullableInputListMapperImpl<I, O>(
     private val mapper: Mapper<I, O>
 ) : NullableInputListMapper<I, O> {
@@ -9,3 +11,4 @@ class NullableInputListMapperImpl<I, O>(
         return input?.map { mapper.map(it) }.orEmpty()
     }
 }
+*/
