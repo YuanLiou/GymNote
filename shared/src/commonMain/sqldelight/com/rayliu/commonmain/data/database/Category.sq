@@ -24,3 +24,6 @@ VALUES (7, "Cardio");
 -- Methods
 getAllCategories:
 SELECT * FROM Category;
+
+getCategoryById:
+SELECT * FROM Category WHERE id = :id;

@@ -1,0 +1,222 @@
+CREATE TABLE Workout (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    categoryId INTEGER NOT NULL,
+    sportRecordTypeId INTEGER NOT NULL,
+    createAt TEXT,
+    lastModified TEXT
+);
+
+-- Initial values for the workout table
+-- abs workout
+INSERT INTO Workout
+VALUES (0, "Ab-Wheel Rollout", 6, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (1, "Cable Crunch", 6, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (2, "Crunch", 6, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (3, "Crunch Machine", 6, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (4, "Decline Crunch", 6, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (5, "Hanging Knee Raise", 6, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (6, "Hanging Leg Raise", 6, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (7, "Plank", 6, 1, NULL, NULL);
+INSERT INTO Workout
+VALUES (8, "Side Plank", 6, 1, NULL, NULL);
+-- back workout
+INSERT INTO Workout
+VALUES (9, "Barbell Row", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (10, "Barbell Shrug", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (11, "Chin Up", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (12, "Deadlift", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (13, "Dumbbell Row", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (14, "Good Morning", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (15, "Hammer Strength Row", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (16, "Lat Pulldown", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (17, "Machine Shrug", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (18, "Neutral Chin Up", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (19, "Pendlay Row", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (20, "Pull Up", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (21, "Pull Up", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (22, "Rack Pull", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (23, "Seated Cable Row", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (24, "Straight-Arm Cable Pushdown", 4, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (25, "T-Bar Row", 4, 0, NULL, NULL);
+-- bicept workout
+INSERT INTO Workout
+VALUES (26, "Barbell Curl", 2, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (27, "Cable Curl", 2, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (28, "Dumbbell Concentration Curl", 2, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (29, "Dumbbell Curl", 2, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (30, "Dumbbell Hammer Curl", 2, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (31, "Dumbbell Preacher Curl", 2, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (32, "EZ-Bar Curl", 2, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (33, "EZ-Bar Preacher Curl", 2, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (34, "Seated Incline Dumbbell Curl", 2, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (35, "Seated Machine Curl", 2, 0, NULL, NULL);
+-- cardio workout
+INSERT INTO Workout
+VALUES (36, "Cycling", 7, 2, NULL, NULL);
+INSERT INTO Workout
+VALUES (37, "Elliptical Trainer", 7, 2, NULL, NULL);
+INSERT INTO Workout
+VALUES (38, "Rowing Machine", 7, 2, NULL, NULL);
+INSERT INTO Workout
+VALUES (39, "Running (Outdoor)", 7, 2, NULL, NULL);
+INSERT INTO Workout
+VALUES (40, "Running (Treadmill)", 7, 2, NULL, NULL);
+INSERT INTO Workout
+VALUES (41, "Stationary Bike", 7, 2, NULL, NULL);
+INSERT INTO Workout
+VALUES (42, "Swimming", 7, 2, NULL, NULL);
+INSERT INTO Workout
+VALUES (43, "Walking", 7, 2, NULL, NULL);
+-- chest workout
+INSERT INTO Workout
+VALUES (44, "Cable Crossover", 3, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (45, "Decline Barbell Bench Press", 3, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (46, "Decline Hammer Strength Chest Press", 3, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (47, "Flat Barbell Bench Press", 3, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (48, "Flat Dumbbell Bench Press", 3, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (49, "Flat Dumbbell Fly", 3, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (50, "Incline Barbell Bench Press", 3, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (51, "Incline Dumbbell Bench Press", 3, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (52, "Incline Dumbbell Fly", 3, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (53, "Incline Hammer Strength Chest Press", 3, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (54, "Seated Machine Fly", 3, 0, NULL, NULL);
+-- legs workout
+INSERT INTO Workout
+VALUES (55, "Barbell Calf Raise", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (56, "Barbell Front Squat", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (57, "Barbell Glute Bridge", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (58, "Barbell Squat", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (59, "Donkey Calf Raise", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (60, "Glute-Ham Raise", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (61, "Leg Extension Machine", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (62, "Leg Press", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (63, "Lying Leg Curl Machine", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (64, "Romanian Deadlift", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (65, "Seated Calf Raise Machine", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (66, "Seated Leg Curl Machine", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (67, "Standing Calf Raise Machine", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (68, "Stiff-Legged Deadlift", 5, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (69, "Sumo Deadlift", 5, 0, NULL, NULL);
+-- shoulder workout
+INSERT INTO Workout
+VALUES (70, "Arnold Dumbbell Press", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (71, "Behind The Neck Barbell Press", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (72, "Cable Face Pull", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (73, "Front Dumbbell Raise", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (74, "Hammer Strength Shoulder Press", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (75, "Lateral Dumbbell Raise", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (76, "Lateral Machine Raise", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (77, "Log Press", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (78, "One-Arm Standing Dumbbell Press", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (79, "Overhead Press", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (80, "Push Press", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (81, "Rear Delt Dumbbell Raise", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (82, "Rear Delt Machine Fly", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (83, "Seated Dumbbell Lateral Raise", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (84, "Seated Dumbbell Press", 0, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (85, "Smith Machine Overhead Press", 0, 0, NULL, NULL);
+-- triceps workout
+INSERT INTO Workout
+VALUES (86, "Cable Overhead Triceps Extension", 1, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (87, "Close Grip Barbell Bench Press", 1, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (88, "Dumbbell Overhead Triceps Extension", 1, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (89, "EZ-Bar Skullcrusher", 1, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (90, "Lying Triceps Extension", 1, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (91, "Parallel Bar Triceps Dip", 1, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (92, "Ring Dip", 1, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (93, "Rope Push Down", 1, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (94, "Smith Machine Close Grip Bench Press", 1, 0, NULL, NULL);
+INSERT INTO Workout
+VALUES (95, "V-Bar Push Down", 1, 0, NULL, NULL);
+
+-- Methods
+getWorkoutByCategoryId:
+SELECT * FROM Workout WHERE categoryId = :categoryId;
+
+updateInitalCreateDate:
+UPDATE Workout
+SET createAt = ?, lastModified = ?
+WHERE createAt IS NULL AND lastModified IS NULL;
+
+
+

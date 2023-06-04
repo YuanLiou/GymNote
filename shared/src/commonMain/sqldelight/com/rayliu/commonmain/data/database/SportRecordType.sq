@@ -1,0 +1,19 @@
+CREATE TABLE SportRecordType (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+);
+
+-- Initial values for the category table
+INSERT INTO SportRecordType
+VALUES (0, "Weight/Reps");
+INSERT INTO SportRecordType
+VALUES (1, "Weight/Time");
+INSERT INTO SportRecordType
+VALUES (2, "Distance/Time");
+
+-- Methods
+getSportRecordById:
+SELECT * FROM SportRecordType WHERE id = :id;
+
+getAllSportRecords:
+SELECT * FROM SportRecordType;
