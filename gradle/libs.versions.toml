@@ -21,6 +21,7 @@ ksp = "1.8.21-1.0.11"
 
 # kotlinx
 collections-immutable = "0.3.5"
+datetime = "0.4.0"
 
 # koin
 koin = "3.4.1"
@@ -58,6 +59,7 @@ activity-compose = { group = "androidx.activity", name = "activity-compose", ver
 
 # kotlinx
 collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "collections-immutable" }
+datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "datetime" }
 
 # koin
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }

@@ -22,6 +22,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.collections.immutable)
+                implementation(libs.datetime)
                 implementation(libs.sqldelight.runtime)
                 implementation(libs.sqldelight.coroutineextension)
                 api(libs.koin.core)

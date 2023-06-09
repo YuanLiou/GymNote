@@ -210,16 +210,15 @@ INSERT INTO Workout
 VALUES (95, "V-Bar Push Down", 1, 0, NULL, NULL);
 
 -- Methods
-getWorkoutByCategoryId:
+getWorkoutById:
+SELECT * FROM Workout WHERE id = :id;
+
+getWorkoutsByCategoryId:
 SELECT * FROM Workout WHERE categoryId = :categoryId;
 
 updateInitalCreateDate:
 UPDATE Workout
 SET createAt = ?, lastModified = ?
-WHERE createAt IS NULL AND lastModified IS NULL;
-
-isInitalCreated:
-SELECT COUNT(*) FROM Workout
 WHERE createAt IS NULL AND lastModified IS NULL;
 
 
