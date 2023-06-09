@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
 
 @Factory
-class GetCategoryUseCase(
+class GetSportCategory(
     private val categoryRepository: CategoryRepository
 ) {
     operator fun invoke(): Flow<ImmutableList<SportCategory>> {
