@@ -21,6 +21,7 @@ import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.compose.material.scrollAway
 import com.rayliu.commonmain.domain.model.SportCategory
+import com.rayliu.gymnote.wearos.components.CircularIndeterminateProgressBar
 import com.rayliu.gymnote.wearos.theme.PreviewConstants
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
@@ -30,6 +31,7 @@ import org.koin.androidx.compose.koinViewModel
 fun CategoryListScreen(
     viewModel: CategoryListViewModel = koinViewModel()
 ) {
+    viewModel.performPreScreenTasks()
     val listState = rememberScalingLazyListState()
     Scaffold(
         timeText = {
@@ -42,15 +44,19 @@ fun CategoryListScreen(
             PositionIndicator(scalingLazyListState = listState)
         }
     ) {
-        val items = viewModel.provideCategories()
-            .collectAsState(initial = emptyList()).value
-        CategoryList(
-            items.toImmutableList(),
-            listState
-        )
+        val loading = viewModel.showProgress.value
+        if (loading) {
+            CircularIndeterminateProgressBar(isDisplayed = true)
+        } else {
+            val items = viewModel.provideCategories()
+                .collectAsState(initial = emptyList()).value
+            CategoryList(
+                items.toImmutableList(),
+                listState
+            )
+        }
     }
 }
-
 
 @Composable
 private fun CategoryList(

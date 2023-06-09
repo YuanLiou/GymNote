@@ -28,10 +28,6 @@ class WorkoutLocalDataSourceImpl(
         queries.updateInitalCreateDate(initialDate, initialDate)
     }
 
-    override suspend fun checkIsInitialDateInserted(): Boolean = withContext(ioDispatcher) {
-        queries.isInitalCreated().executeAsOneOrNull()?.let { it > 0 } ?: false
-    }
-
     override fun getWorkoutsFlow(categoryId: Long): Flow<List<Workout>> {
         return queries.getWorkoutByCategoryId(categoryId).asFlow().mapToList(defaultDispatcher)
     }

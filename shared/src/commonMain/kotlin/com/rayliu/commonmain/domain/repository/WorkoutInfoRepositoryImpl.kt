@@ -8,5 +8,6 @@ class WorkoutInfoRepositoryImpl(
     private val localDataSource: WorkoutLocalDataSource
 ) : WorkoutInfoRepository {
     override suspend fun updateInitialDateIfNeeded(initialDate: String) {
+        localDataSource.updateInitialDate(initialDate)
     }
 }

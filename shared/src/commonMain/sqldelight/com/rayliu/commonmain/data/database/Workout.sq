@@ -221,9 +221,5 @@ UPDATE Workout
 SET createAt = ?, lastModified = ?
 WHERE createAt IS NULL AND lastModified IS NULL;
 
-isInitalCreated:
-SELECT COUNT(*) FROM Workout
-WHERE createAt IS NULL AND lastModified IS NULL;
-
 
 

@@ -1,6 +1,7 @@
 package com.rayliu.commonmain.data.database
 
 import app.cash.sqldelight.db.SqlDriver
+import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
@@ -10,5 +11,10 @@ class DatabaseModule {
     @Single
     fun provideAppDatabase(sqlDriver: SqlDriver): AppDatabase {
         return AppDatabase(sqlDriver)
+    }
+
+    @Factory
+    fun provideDateTimeConverter(): DateTimeConverter {
+        return DateTimeConverter()
     }
 }
