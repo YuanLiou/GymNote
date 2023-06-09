@@ -210,6 +210,9 @@ INSERT INTO Workout
 VALUES (95, "V-Bar Push Down", 1, 0, NULL, NULL);
 
 -- Methods
+getWorkoutById:
+SELECT * FROM Workout WHERE id = :id;
+
 getWorkoutByCategoryId:
 SELECT * FROM Workout WHERE categoryId = :categoryId;
 
