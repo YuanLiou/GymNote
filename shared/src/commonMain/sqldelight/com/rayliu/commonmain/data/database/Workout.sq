@@ -213,7 +213,7 @@ VALUES (95, "V-Bar Push Down", 1, 0, NULL, NULL);
 getWorkoutById:
 SELECT * FROM Workout WHERE id = :id;
 
-getWorkoutByCategoryId:
+getWorkoutsByCategoryId:
 SELECT * FROM Workout WHERE categoryId = :categoryId;
 
 updateInitalCreateDate:

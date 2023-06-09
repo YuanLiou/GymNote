@@ -19,9 +19,9 @@ class WorkoutLocalDataSourceImpl(
 
     private val queries = appDatabase.workoutQueries
 
-    override suspend fun getWorkoutByCategoryId(id: Long): List<Workout> =
+    override suspend fun getWorkoutsByCategoryId(id: Long): List<Workout> =
         withContext(ioDispatcher) {
-            queries.getWorkoutByCategoryId(id).executeAsList()
+            queries.getWorkoutsByCategoryId(id).executeAsList()
         }
 
     override suspend fun updateInitialDate(initialDate: String) = withContext(ioDispatcher) {
@@ -29,6 +29,6 @@ class WorkoutLocalDataSourceImpl(
     }
 
     override fun getWorkoutsFlow(categoryId: Long): Flow<List<Workout>> {
-        return queries.getWorkoutByCategoryId(categoryId).asFlow().mapToList(defaultDispatcher)
+        return queries.getWorkoutsByCategoryId(categoryId).asFlow().mapToList(defaultDispatcher)
     }
 }
