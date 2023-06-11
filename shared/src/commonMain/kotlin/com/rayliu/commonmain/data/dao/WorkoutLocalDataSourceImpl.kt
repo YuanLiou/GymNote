@@ -28,6 +28,10 @@ class WorkoutLocalDataSourceImpl(
         queries.updateInitalCreateDate(initialDate, initialDate)
     }
 
+    override suspend fun getInitialGeneratedWorkoutCounts(): Int {
+        return queries.getInitialGenerateWorkoutCounts().executeAsOneOrNull()?.toInt() ?: 0
+    }
+
     override fun getWorkoutsFlow(categoryId: Long): Flow<List<Workout>> {
         return queries.getWorkoutsByCategoryId(categoryId).asFlow().mapToList(defaultDispatcher)
     }

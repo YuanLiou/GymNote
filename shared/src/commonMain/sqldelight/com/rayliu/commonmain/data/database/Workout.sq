@@ -221,5 +221,10 @@ UPDATE Workout
 SET createAt = ?, lastModified = ?
 WHERE createAt IS NULL AND lastModified IS NULL;
 
+getInitialGenerateWorkoutCounts:
+SELECT COUNT(*)
+FROM Workout
+WHERE createAt IS NULL AND lastModified IS NULL;
+
 
 

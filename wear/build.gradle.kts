@@ -92,10 +92,13 @@ dependencies {
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
     implementation(libs.ui.tooling.preview)
-    implementation(libs.compose.material)
-    implementation(libs.compose.foundation)
+    implementation(libs.wear.compose.material)
+    implementation(libs.wear.compose.foundation)
+    implementation(libs.wear.compose.navigation)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
+    implementation(libs.horologist.composables)
+    implementation(libs.horologist.compose.layout)
 
     // kotlinx
     implementation(libs.collections.immutable)
@@ -104,6 +107,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+    implementation(libs.koin.compose.navigation)
     implementation(libs.koin.annotations)
     ksp(libs.koin.ksp.compiler)
 
