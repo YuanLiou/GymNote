@@ -1,57 +1,36 @@
 package com.rayliu.gymnote.wearos.categorylist
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.wear.compose.material.AutoCenteringParams
+import androidx.wear.compose.foundation.lazy.AutoCenteringParams
+import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
+import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.material.Chip
-import androidx.wear.compose.material.PositionIndicator
-import androidx.wear.compose.material.Scaffold
-import androidx.wear.compose.material.ScalingLazyColumn
-import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.Text
-import androidx.wear.compose.material.TimeText
-import androidx.wear.compose.material.Vignette
-import androidx.wear.compose.material.VignettePosition
-import androidx.wear.compose.material.rememberScalingLazyListState
-import androidx.wear.compose.material.scrollAway
 import com.rayliu.commonmain.domain.model.SportCategory
 import com.rayliu.gymnote.wearos.components.CircularIndeterminateProgressBar
 import com.rayliu.gymnote.wearos.theme.PreviewConstants
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.toImmutableList
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CategoryListScreen(
-    viewModel: CategoryListViewModel = koinViewModel()
+    sportCategories: ImmutableList<SportCategory>,
+    showLoadingScreen: Boolean,
+    listState: ScalingLazyListState,
+    modifier: Modifier = Modifier
 ) {
-    viewModel.performPreScreenTasks()
-    val listState = rememberScalingLazyListState()
-    Scaffold(
-        timeText = {
-            TimeText(modifier = Modifier.scrollAway(listState))
-        },
-        vignette = {
-            Vignette(vignettePosition = VignettePosition.TopAndBottom)
-        },
-        positionIndicator = {
-            PositionIndicator(scalingLazyListState = listState)
-        }
-    ) {
-        val loading = viewModel.showProgress.value
-        if (loading) {
+    Box(modifier = modifier.fillMaxSize()) {
+        if (showLoadingScreen) {
             CircularIndeterminateProgressBar(isDisplayed = true)
         } else {
-            val items = viewModel.provideCategories()
-                .collectAsState(initial = emptyList()).value
             CategoryList(
-                items.toImmutableList(),
+                sportCategories,
                 listState
             )
         }
@@ -61,13 +40,14 @@ fun CategoryListScreen(
 @Composable
 private fun CategoryList(
     sportCategories: ImmutableList<SportCategory>,
-    listState: ScalingLazyListState
+    listState: ScalingLazyListState,
+    modifier: Modifier = Modifier
 ) {
-    val contentModifier = Modifier
+    val contentModifier = modifier
         .fillMaxWidth()
         .padding(bottom = 8.dp)
     ScalingLazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         autoCentering = AutoCenteringParams(itemIndex = 0),
         state = listState
     ) {
