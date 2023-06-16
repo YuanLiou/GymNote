@@ -23,6 +23,7 @@ fun CategoryListScreen(
     sportCategories: ImmutableList<SportCategory>,
     showLoadingScreen: Boolean,
     listState: ScalingLazyListState,
+    onCategoryClicked: (SportCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier.fillMaxSize()) {
@@ -31,7 +32,8 @@ fun CategoryListScreen(
         } else {
             CategoryList(
                 sportCategories,
-                listState
+                listState,
+                onCategoryClicked = onCategoryClicked
             )
         }
     }
@@ -41,6 +43,7 @@ fun CategoryListScreen(
 private fun CategoryList(
     sportCategories: ImmutableList<SportCategory>,
     listState: ScalingLazyListState,
+    onCategoryClicked: (SportCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val contentModifier = modifier
@@ -52,7 +55,15 @@ private fun CategoryList(
         state = listState
     ) {
         sportCategories.forEach {
-            item { CategoryItem(categoryName = it.name, contentModifier) }
+            item {
+                CategoryItem(
+                    categoryName = it.name,
+                    onItemClick = {
+                        onCategoryClicked(it)
+                    },
+                    contentModifier
+                )
+            }
         }
     }
 }
@@ -60,11 +71,12 @@ private fun CategoryList(
 @Composable
 private fun CategoryItem(
     categoryName: String,
+    onItemClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Chip(
         modifier = modifier.fillMaxWidth(),
-        onClick = {},
+        onClick = onItemClick,
         label = {
             Text(categoryName)
         }
@@ -82,5 +94,8 @@ private fun CategoryItem(
 )
 @Composable
 private fun CategoryItemPreview() {
-    CategoryItem(categoryName = "Testing Chip")
+    CategoryItem(
+        categoryName = "Testing Chip",
+        onItemClick = {}
+    )
 }

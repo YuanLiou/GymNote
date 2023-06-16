@@ -78,7 +78,10 @@ fun WearApp(
                 startDestination = Screen.SportsCategory.route,
                 modifier = Modifier.background(MaterialTheme.colors.background)
             ) {
-                mainNavGraph(modifier = modifier)
+                mainNavGraph(
+                    navController = swipeDismissableNavController,
+                    modifier = modifier,
+                )
             }
         }
     }
