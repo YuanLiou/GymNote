@@ -14,5 +14,5 @@ object AppSettings {
 
     // check: https://developer.android.com/jetpack/androidx/releases/compose-kotlin
     const val kotlinCompilerExtensionVersion = "1.4.7"
-    val javaVersion = JavaVersion.VERSION_11
+    val javaVersion = JavaVersion.VERSION_17
 }
