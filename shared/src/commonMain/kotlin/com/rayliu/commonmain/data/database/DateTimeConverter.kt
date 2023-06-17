@@ -8,6 +8,10 @@ import kotlinx.datetime.toLocalDateTime
 
 class DateTimeConverter {
 
+    fun provideCurrentMoment(): LocalDateTime {
+        return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+    }
+
     fun provideNowTimeStamps(): String {
         return toDatabaseDateTime(Clock.System.now())
     }
