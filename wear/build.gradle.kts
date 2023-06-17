@@ -45,11 +45,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = AppSettings.javaVersion
+        targetCompatibility = AppSettings.javaVersion
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = AppSettings.javaVersion.toString()
     }
     buildFeatures {
         compose = true
@@ -66,11 +66,11 @@ android {
 
 allprojects {
     tasks.withType(KotlinCompile::class.java).configureEach {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+        kotlinOptions.jvmTarget = AppSettings.javaVersion.toString()
     }
 
     tasks.withType(KaptGenerateStubsTask::class.java).configureEach {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+        kotlinOptions.jvmTarget = AppSettings.javaVersion.toString()
     }
 
     tasks.lintKotlinMain {
