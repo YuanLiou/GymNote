@@ -1,3 +1,5 @@
+import org.gradle.api.JavaVersion
+
 object AppSettings {
     const val compileSdk = 33
     const val targetSdk = 33
@@ -12,4 +14,5 @@ object AppSettings {
 
     // check: https://developer.android.com/jetpack/androidx/releases/compose-kotlin
     const val kotlinCompilerExtensionVersion = "1.4.7"
+    val javaVersion = JavaVersion.VERSION_11
 }
