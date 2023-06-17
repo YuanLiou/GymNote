@@ -8,11 +8,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
+import com.google.android.horologist.annotations.ExperimentalHorologistApi
+import com.google.android.horologist.compose.rotaryinput.rotaryWithScroll
 import com.rayliu.commonmain.domain.model.SportsRecordType
 import com.rayliu.commonmain.domain.model.WorkoutInfo
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
@@ -27,6 +30,7 @@ import kotlinx.datetime.toLocalDateTime
 fun WorkoutListScreen(
     workoutInfos: ImmutableList<WorkoutInfo>,
     listState: ScalingLazyListState,
+    focusRequester: FocusRequester,
     onWorkoutClicked: (WorkoutInfo) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -38,16 +42,19 @@ fun WorkoutListScreen(
         WorkoutInfoList(
             workoutInfos = workoutInfos,
             listState = listState,
+            focusRequester = focusRequester,
             onWorkoutClicked = onWorkoutClicked,
             modifier = modifier
         )
     }
 }
 
+@OptIn(ExperimentalHorologistApi::class)
 @Composable
 private fun WorkoutInfoList(
     workoutInfos: ImmutableList<WorkoutInfo>,
     listState: ScalingLazyListState,
+    focusRequester: FocusRequester,
     onWorkoutClicked: (WorkoutInfo) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -55,7 +62,7 @@ private fun WorkoutInfoList(
         .fillMaxWidth()
         .padding(bottom = 8.dp)
     ScalingLazyColumn(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.rotaryWithScroll(focusRequester, listState).fillMaxSize(),
         autoCentering = AutoCenteringParams(itemIndex = 0),
         state = listState
     ) {
@@ -99,7 +106,8 @@ private fun WorkoutListScreenPreview() {
                 )
             ),
             onWorkoutClicked = {},
-            listState = ScalingLazyListState()
+            listState = ScalingLazyListState(),
+            focusRequester = FocusRequester()
         )
     }
 }
