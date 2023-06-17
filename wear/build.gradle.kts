@@ -102,6 +102,7 @@ dependencies {
 
     // kotlinx
     implementation(libs.collections.immutable)
+    implementation(libs.datetime)
 
     // koin
     implementation(libs.koin.core)

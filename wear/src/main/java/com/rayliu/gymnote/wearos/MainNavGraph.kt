@@ -1,9 +1,11 @@
 package com.rayliu.gymnote.wearos
 
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
@@ -73,9 +75,13 @@ fun NavGraphBuilder.mainNavGraph(
         val workoutInfos =
             viewModel.provideWorkoutInfos().collectAsState(initial = emptyList()).value
 
+        val context = LocalContext.current
         WorkoutListScreen(
             workoutInfos = workoutInfos.toImmutableList(),
             listState = scalingLazyListState,
+            onWorkoutClicked = {
+                Toast.makeText(context, "workout clicked ${it.name}", Toast.LENGTH_SHORT).show()
+            },
             modifier = modifier
         )
     }
