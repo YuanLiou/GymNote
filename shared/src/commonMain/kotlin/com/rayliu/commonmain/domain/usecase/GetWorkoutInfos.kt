@@ -1,6 +1,5 @@
 package com.rayliu.commonmain.domain.usecase
 
-import com.rayliu.commonmain.domain.model.SportCategory
 import com.rayliu.commonmain.domain.model.WorkoutInfo
 import com.rayliu.commonmain.domain.repository.WorkoutInfoRepository
 import kotlinx.collections.immutable.ImmutableList
@@ -13,8 +12,8 @@ import org.koin.core.annotation.Factory
 class GetWorkoutInfos(
     private val workoutInfoRepository: WorkoutInfoRepository
 ) {
-    operator fun invoke(sportCategory: SportCategory): Flow<ImmutableList<WorkoutInfo>> {
-        return workoutInfoRepository.provideWorkoutInfos(sportCategory.id).map {
+    operator fun invoke(categoryId: Int): Flow<ImmutableList<WorkoutInfo>> {
+        return workoutInfoRepository.provideWorkoutInfos(categoryId).map {
             it.toImmutableList()
         }
     }

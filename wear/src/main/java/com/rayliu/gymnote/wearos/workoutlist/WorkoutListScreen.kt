@@ -9,11 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.material.Text
+import com.rayliu.commonmain.domain.model.WorkoutInfo
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun WorkoutListScreen(
-    categoryId: Int,
+    workoutInfos: ImmutableList<WorkoutInfo>,
     listState: ScalingLazyListState,
     modifier: Modifier = Modifier
 ) {
@@ -22,7 +25,7 @@ fun WorkoutListScreen(
         horizontalArrangement = Arrangement.Center,
         modifier = modifier.fillMaxSize()
     ) {
-        Text(text = "Hello id: $categoryId")
+        Text(text = "Hello id: size is ${workoutInfos.size}")
     }
 }
 
@@ -31,7 +34,7 @@ fun WorkoutListScreen(
 private fun WorkoutListScreenPreview() {
     GymNoteTheme {
         WorkoutListScreen(
-            13,
+            listOf<WorkoutInfo>().toImmutableList(),
             ScalingLazyListState()
         )
     }
