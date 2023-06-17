@@ -3,21 +3,26 @@ package com.rayliu.gymnote.wearos.categorylist
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rayliu.commonmain.domain.model.SportCategory
 import com.rayliu.commonmain.domain.usecase.GetSportCategory
 import com.rayliu.commonmain.domain.usecase.UpdateWorkoutInitialDate
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.coroutines.flow.Flow
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
 class CategoryListViewModel(
-    private val getSportCategory: GetSportCategory,
+    getSportCategory: GetSportCategory,
     private val updateWorkoutInitialDate: UpdateWorkoutInitialDate
 ) : ViewModel() {
 
     val showProgress = mutableStateOf(false)
+    val categoryListState = getSportCategory().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = persistentListOf()
+    )
 
     fun performPreScreenTasks() {
         viewModelScope.launch {
@@ -25,9 +30,5 @@ class CategoryListViewModel(
             updateWorkoutInitialDate()
             showProgress.value = false
         }
-    }
-
-    fun provideCategories(): Flow<ImmutableList<SportCategory>> {
-        return getSportCategory()
     }
 }

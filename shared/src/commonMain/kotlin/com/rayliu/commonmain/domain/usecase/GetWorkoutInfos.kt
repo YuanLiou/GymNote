@@ -5,6 +5,7 @@ import com.rayliu.commonmain.domain.repository.WorkoutInfoRepository
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
 
@@ -13,6 +14,9 @@ class GetWorkoutInfos(
     private val workoutInfoRepository: WorkoutInfoRepository
 ) {
     operator fun invoke(categoryId: Int): Flow<ImmutableList<WorkoutInfo>> {
+        if (categoryId < 0) {
+            return emptyFlow()
+        }
         return workoutInfoRepository.provideWorkoutInfos(categoryId).map {
             it.toImmutableList()
         }
