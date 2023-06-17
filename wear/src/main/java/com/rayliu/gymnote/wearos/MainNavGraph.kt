@@ -27,7 +27,6 @@ import com.rayliu.gymnote.wearos.navigation.SCROLL_TYPE_NAV_ARGUMENT
 import com.rayliu.gymnote.wearos.navigation.Screen
 import com.rayliu.gymnote.wearos.workoutlist.WorkoutListScreen
 import com.rayliu.gymnote.wearos.workoutlist.WorkoutListViewModel
-import kotlinx.collections.immutable.persistentListOf
 import org.koin.androidx.compose.navigation.koinNavViewModel
 
 fun NavGraphBuilder.mainNavGraph(
@@ -46,7 +45,7 @@ fun NavGraphBuilder.mainNavGraph(
         val focusRequester = remember { FocusRequester() }
         val viewModel: CategoryListViewModel = koinNavViewModel()
         val sportsCategories =
-            viewModel.provideCategories().collectAsState(initial = persistentListOf()).value
+            viewModel.categoryListState.collectAsState().value
         val scalingLazyListState = scalingLazyListState(entry)
         LaunchedEffect(key1 = null) {
             viewModel.performPreScreenTasks()
@@ -82,7 +81,7 @@ fun NavGraphBuilder.mainNavGraph(
         val focusRequester = remember { FocusRequester() }
         val viewModel: WorkoutListViewModel = koinNavViewModel()
         val workoutInfos =
-            viewModel.provideWorkoutInfos().collectAsState(initial = persistentListOf()).value
+            viewModel.workoutInfoState.collectAsState().value
 
         val context = LocalContext.current
         WorkoutListScreen(
