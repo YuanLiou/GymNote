@@ -93,11 +93,11 @@ allprojects {
     }
 
     tasks.lintKotlinCommonMain {
-        exclude { it.file.path.contains("generated/")}
+        exclude { it.file.path.contains("generated/") }
     }
 
     tasks.formatKotlinCommonMain {
-        exclude { it.file.path.contains("generated/")}
+        exclude { it.file.path.contains("generated/") }
     }
 }
 
@@ -110,6 +110,10 @@ sqldelight {
     databases {
         create("AppDatabase") {
             packageName.set("com.rayliu.commonmain.data.database")
+            schemaOutputDirectory.set(
+                file("src/commonMain/sqldelight/schema")
+            )
+            verifyMigrations.set(true)
         }
     }
 }

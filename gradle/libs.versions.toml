@@ -24,8 +24,8 @@ collections-immutable = "0.3.5"
 datetime = "0.4.0"
 
 # koin
-koin = "3.4.1"
-koin-annotation = "1.2.1"
+koin = "3.4.2"
+koin-annotation = "1.2.2"
 koin-compose = "3.4.5"
 
 # code check
