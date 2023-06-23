@@ -1,0 +1,31 @@
+CREATE TABLE RecordDetails (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    workoutRecordId INTEGER NOT NULL,
+    createAt Text NOT NULL ,
+    lastModified TEXT NOT NULL,
+    weight REAL,
+    reps INTEGER,
+    time TEXT,
+    distance REAL
+);
+
+-- Methods
+insertNewRecord:
+INSERT OR REPLACE
+INTO RecordDetails
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+getRecordDetails:
+SELECT *
+FROM RecordDetails
+WHERE workoutRecordId = :id
+ORDER BY createAt DESC;
+
+updateRecord:
+UPDATE RecordDetails
+SET lastModified = ?, weight = ?, reps = ?, time = ?, distance = ?
+WHERE id = :id;
+
+deleteRecord:
+DELETE FROM RecordDetails
+WHERE id = :id;
