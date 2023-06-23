@@ -18,11 +18,11 @@ class RecordMapper(
     private val dateTimeConverter: DateTimeConverter
 ) : Mapper<RecordDetails, Record> {
     override fun map(input: RecordDetails): Record {
-        val type = sportRecordTypeMapper.map(input.sportRecordTypeId.toInt())
-        return when (type) {
+        return when (val type = sportRecordTypeMapper.map(input.sportRecordTypeId.toInt())) {
             SportRecordType.WEIGHT_REPS -> WeightRepsRecord(
                 id = input.id.toInt(),
                 workoutRecordId = input.workoutRecordId.toInt(),
+                sportRecordType = type,
                 createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
                 lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
                 weight = input.weight?.toFloat() ?: 0f,
@@ -31,6 +31,7 @@ class RecordMapper(
             SportRecordType.WEIGHT_TIME -> WeightTimeRecord(
                 id = input.id.toInt(),
                 workoutRecordId = input.workoutRecordId.toInt(),
+                sportRecordType = type,
                 createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
                 lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
                 weight = input.weight?.toFloat() ?: 0f,
@@ -39,6 +40,7 @@ class RecordMapper(
             SportRecordType.DISTANCE_TIME -> DistanceTimeRecord(
                 id = input.id.toInt(),
                 workoutRecordId = input.workoutRecordId.toInt(),
+                sportRecordType = type,
                 createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
                 lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
                 distance = input.distance?.toFloat() ?: 0f,
@@ -47,6 +49,7 @@ class RecordMapper(
             SportRecordType.UNKNOWN -> UnknownRecord(
                 id = input.id.toInt(),
                 workoutRecordId = input.workoutRecordId.toInt(),
+                sportRecordType = type,
                 createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
                 lastModified = dateTimeConverter.toLocalDateTime(input.lastModified)
             )
