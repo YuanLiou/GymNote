@@ -3,6 +3,7 @@ CREATE TABLE RecordDetails (
     workoutRecordId INTEGER NOT NULL,
     createAt Text NOT NULL ,
     lastModified TEXT NOT NULL,
+    sportRecordTypeId INTEGER NOT NULL,
     weight REAL,
     reps INTEGER,
     time TEXT,
@@ -13,7 +14,7 @@ CREATE TABLE RecordDetails (
 insertNewRecord:
 INSERT OR REPLACE
 INTO RecordDetails
-VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 getRecordDetails:
 SELECT *

@@ -1,15 +1,15 @@
 package com.rayliu.commonmain.data.mapper
 
 import com.rayliu.commonmain.data.mapper.basic.Mapper
-import com.rayliu.commonmain.domain.model.SportsRecordType
+import com.rayliu.commonmain.domain.model.SportRecordType
 import org.koin.core.annotation.Factory
 
 @Factory
-class SportRecordTypeMapper : Mapper<Int, SportsRecordType> {
-    override fun map(input: Int): SportsRecordType {
-        if (!SportsRecordType.map.containsKey(input)) {
-            return SportsRecordType.UNKNOWN
+class SportRecordTypeMapper : Mapper<Int, SportRecordType> {
+    override fun map(input: Int): SportRecordType {
+        if (!SportRecordType.map.containsKey(input)) {
+            return SportRecordType.UNKNOWN
         }
-        return SportsRecordType.map[input] ?: SportsRecordType.UNKNOWN
+        return SportRecordType.map[input] ?: SportRecordType.UNKNOWN
     }
 }

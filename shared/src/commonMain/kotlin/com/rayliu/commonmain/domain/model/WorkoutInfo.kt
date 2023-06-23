@@ -6,7 +6,7 @@ data class WorkoutInfo(
     val id: Int,
     val name: String,
     val categoryId: Int,
-    val sportRecordType: SportsRecordType,
+    val sportRecordType: SportRecordType,
     val createdAt: LocalDateTime,
     val lastModified: LocalDateTime
 )

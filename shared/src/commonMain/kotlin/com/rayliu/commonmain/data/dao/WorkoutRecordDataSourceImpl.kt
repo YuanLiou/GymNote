@@ -32,6 +32,7 @@ class WorkoutRecordDataSourceImpl(
     override suspend fun insertRecordDetails(
         workoutRecordId: Long,
         createAt: String,
+        sportRecordTypeId: Long,
         weight: Double?,
         reps: Long?,
         time: String?,
@@ -42,6 +43,7 @@ class WorkoutRecordDataSourceImpl(
             workoutRecordId = workoutRecordId,
             createAt = createAt,
             lastModified = createAt,
+            sportRecordTypeId = sportRecordTypeId,
             weight = weight,
             reps = reps,
             time = time,

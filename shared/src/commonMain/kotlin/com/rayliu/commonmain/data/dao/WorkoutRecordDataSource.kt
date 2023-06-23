@@ -10,6 +10,7 @@ interface WorkoutRecordDataSource {
     suspend fun insertRecordDetails(
         workoutRecordId: Long,
         createAt: String,
+        sportRecordTypeId: Long,
         weight: Double?,
         reps: Long?,
         time: String?,

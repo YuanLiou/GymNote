@@ -16,7 +16,7 @@ import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
 import com.google.android.horologist.compose.rotaryinput.rotaryWithScroll
-import com.rayliu.commonmain.domain.model.SportsRecordType
+import com.rayliu.commonmain.domain.model.SportRecordType
 import com.rayliu.commonmain.domain.model.WorkoutInfo
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
 import com.rayliu.gymnote.wearos.ui.OptionItem
@@ -90,7 +90,7 @@ private fun WorkoutListScreenPreview() {
                     id = 6278,
                     name = "Odessa Huber",
                     categoryId = 4839,
-                    sportRecordType = SportsRecordType.WEIGHT_REPS,
+                    sportRecordType = SportRecordType.WEIGHT_REPS,
                     createdAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
                     lastModified = Clock.System.now()
                         .toLocalDateTime(TimeZone.currentSystemDefault())
@@ -99,7 +99,7 @@ private fun WorkoutListScreenPreview() {
                     id = 4784,
                     name = "Blanca Willis",
                     categoryId = 7617,
-                    sportRecordType = SportsRecordType.WEIGHT_REPS,
+                    sportRecordType = SportRecordType.WEIGHT_REPS,
                     createdAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
                     lastModified = Clock.System.now()
                         .toLocalDateTime(TimeZone.currentSystemDefault())
