@@ -4,6 +4,8 @@ import com.rayliu.commonmain.data.dao.WorkoutRecordDataSource
 import com.rayliu.commonmain.data.mapper.RecordDetailsMapper
 import com.rayliu.commonmain.data.mapper.RecordListMapper
 import com.rayliu.commonmain.domain.model.Record
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
@@ -14,9 +16,9 @@ class SportRecordRepositoryImpl(
     private val recordDetailsMapper: RecordDetailsMapper,
     private val recordListMapper: RecordListMapper
 ) : SportRecordRepository {
-    override fun getSportRecords(workoutInfoId: Int): Flow<List<Record>> {
+    override fun getSportRecords(workoutInfoId: Int): Flow<ImmutableList<Record>> {
         return workoutRecordDataSource.getWorkoutRecordDetails(workoutInfoId.toLong()).map {
-            recordListMapper.map(it)
+            recordListMapper.map(it).toImmutableList()
         }
     }
 

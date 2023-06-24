@@ -4,6 +4,8 @@ import com.rayliu.commonmain.data.dao.WorkoutLocalDataSource
 import com.rayliu.commonmain.data.mapper.WorkoutInfoListMapper
 import com.rayliu.commonmain.data.mapper.WorkoutInfoMapper
 import com.rayliu.commonmain.domain.model.WorkoutInfo
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.koin.core.annotation.Factory
@@ -26,9 +28,9 @@ class WorkoutInfoRepositoryImpl(
         }
     }
 
-    override fun provideWorkoutInfos(categoryId: Int): Flow<List<WorkoutInfo>> {
+    override fun provideWorkoutInfos(categoryId: Int): Flow<ImmutableList<WorkoutInfo>> {
         return localDataSource.getWorkoutsFlow(categoryId.toLong()).map {
-            workoutInfoListMapper.map(it)
+            workoutInfoListMapper.map(it).toImmutableList()
         }
     }
 }
