@@ -16,10 +16,6 @@ class UseCaseModule {
         GetSportCategory(categoryRepository::provideBasicCategories)
 
     @Factory
-    fun provideGetSportRecords(sportRecordRepository: SportRecordRepository) =
-        GetSportRecords(sportRecordRepository::getSportRecords)
-
-    @Factory
     fun provideGetWorkoutInfo(workoutInfoRepository: WorkoutInfoRepository) =
         GetWorkoutInfo(workoutInfoRepository::getWorkoutInfo)
 

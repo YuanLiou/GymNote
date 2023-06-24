@@ -31,6 +31,7 @@ import com.rayliu.gymnote.wearos.workout.WorkoutScreen
 import com.rayliu.gymnote.wearos.workout.WorkoutViewModel
 import com.rayliu.gymnote.wearos.workoutlist.WorkoutListScreen
 import com.rayliu.gymnote.wearos.workoutlist.WorkoutListViewModel
+import kotlinx.collections.immutable.persistentListOf
 import org.koin.androidx.compose.navigation.koinNavViewModel
 
 fun NavGraphBuilder.mainNavGraph(
@@ -116,16 +117,25 @@ fun NavGraphBuilder.mainNavGraph(
         val focusRequester = remember { FocusRequester() }
         val viewModel: WorkoutViewModel = koinNavViewModel()
         viewModel.performPreScreenTasks()
+        val records = viewModel.workoutRecords.collectAsState(initial = persistentListOf()).value
 
         val context = LocalContext.current
         WorkoutScreen(
             listState = scalingLazyListState,
             focusRequester = focusRequester,
             workoutInfo = viewModel.workoutInfo.value,
+            records = records,
             onAddButtonClicked = {
                 Toast.makeText(
                     context,
                     "Add button clicked",
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            onCardClicked = {
+                Toast.makeText(
+                    context,
+                    "Record id is ${it.id}",
                     Toast.LENGTH_SHORT
                 ).show()
             }
