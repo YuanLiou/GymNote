@@ -53,7 +53,7 @@ private fun CategoryList(
     onCategoryClicked: (SportCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val contentModifier = modifier
+    val contentModifier = Modifier
         .fillMaxWidth()
         .padding(bottom = 8.dp)
     ScalingLazyColumn(

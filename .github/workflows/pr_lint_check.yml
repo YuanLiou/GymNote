@@ -18,3 +18,24 @@ jobs:
           android: true
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
+
+  android-lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [17]
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: ${{ matrix.version }}
+      - name: lintDebug
+        run: ./gradlew lint
+      - uses: actions/upload-artifact@v3
+        with:
+          name: android-lint-report
+          path: ~/**/build/reports/lint-results*.html

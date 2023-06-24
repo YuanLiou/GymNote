@@ -44,7 +44,7 @@ fun WorkoutListScreen(
             listState = listState,
             focusRequester = focusRequester,
             onWorkoutClicked = onWorkoutClicked,
-            modifier = modifier
+            modifier = Modifier
         )
     }
 }
@@ -58,7 +58,7 @@ private fun WorkoutInfoList(
     onWorkoutClicked: (WorkoutInfo) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val contentModifier = modifier
+    val contentModifier = Modifier
         .fillMaxWidth()
         .padding(bottom = 8.dp)
     ScalingLazyColumn(

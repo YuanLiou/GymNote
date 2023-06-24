@@ -1,16 +1,3 @@
 <resources>
     <string name="app_name">GymNote</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">From the Square world,\nHello, %1$s!</string>
-    <string name="category_basic_shoulders">Shoulders</string>
-    <string name="category_basic_triceps">Triceps</string>
-    <string name="category_basic_biceps">Biceps</string>
-    <string name="category_basic_chest">Chest</string>
-    <string name="category_basic_back">Back</string>
-    <string name="category_basic_legs">Legs</string>
-    <string name="category_basic_abs">Abs</string>
-    <string name="category_basic_cardio">Cardio</string>
 </resources>

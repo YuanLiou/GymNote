@@ -30,6 +30,7 @@ koin-compose = "3.4.5"
 
 # code check
 kotlinter = "3.15.0"
+slack-compose-lint = "1.2.0"
 
 # sql delight
 sqldelight = "2.0.0-rc01"
@@ -76,6 +77,9 @@ koin-compose-navigation = { group = "io.insert-koin", name = "koin-androidx-comp
 sqldelight-runtime = { group = "app.cash.sqldelight", name = "runtime", version.ref = "sqldelight" }
 sqldelight-androiddriver = { group = "app.cash.sqldelight", name = "android-driver", version.ref = "sqldelight" }
 sqldelight-coroutineextension = { group = "app.cash.sqldelight", name = "coroutines-extensions", version.ref = "sqldelight" }
+
+# ktlint
+slack-compose-linter = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "slack-compose-lint" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

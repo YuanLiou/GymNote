@@ -1,5 +1,6 @@
 package com.rayliu.gymnote.wearos
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,6 +27,7 @@ import com.rayliu.gymnote.wearos.navigation.SCROLL_TYPE_NAV_ARGUMENT
 import com.rayliu.gymnote.wearos.navigation.Screen
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
 
+@SuppressLint("ComposeViewModelInjection")
 @Composable
 fun WearApp(
     modifier: Modifier = Modifier,
