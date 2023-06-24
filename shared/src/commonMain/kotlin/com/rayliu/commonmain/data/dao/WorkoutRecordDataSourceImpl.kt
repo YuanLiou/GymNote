@@ -4,6 +4,7 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.rayliu.commonmain.data.database.AppDatabase
 import com.rayliu.commonmain.data.database.RecordDetails
+import com.rayliu.commonmain.domain.model.RECORD_EMPTY_ID
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -38,6 +39,10 @@ class WorkoutRecordDataSourceImpl(
     }
 
     override suspend fun updateRecordDetails(recordDetails: RecordDetails) = withContext(ioDispatcher) {
+        if (recordDetails.id == RECORD_EMPTY_ID.toLong()) {
+            return@withContext
+        }
+
         detailsQueries.updateRecord(
             id = recordDetails.id,
             lastModified = recordDetails.lastModified,

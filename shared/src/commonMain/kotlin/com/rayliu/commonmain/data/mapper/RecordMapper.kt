@@ -95,7 +95,7 @@ class RecordDetailsMapper : Mapper<Record, RecordDetails> {
         }
 
         return RecordDetails(
-            id = -1,
+            id = input.id.toLong(),
             workoutId = input.workoutId.toLong(),
             createAt = input.createdAt.toString(),
             lastModified = input.lastModified.toString(),

@@ -2,6 +2,8 @@ package com.rayliu.commonmain.domain.model
 
 import kotlinx.datetime.LocalDateTime
 
+const val RECORD_EMPTY_ID = -1
+
 interface Record {
     val id: Int
     val workoutId: Int
@@ -11,7 +13,7 @@ interface Record {
 }
 
 data class WeightRepsRecord(
-    override val id: Int,
+    override val id: Int = RECORD_EMPTY_ID,
     override val workoutId: Int,
     override val sportRecordType: SportRecordType,
     override val createdAt: LocalDateTime,
@@ -21,7 +23,7 @@ data class WeightRepsRecord(
 ) : Record
 
 data class WeightTimeRecord(
-    override val id: Int,
+    override val id: Int = RECORD_EMPTY_ID,
     override val workoutId: Int,
     override val sportRecordType: SportRecordType,
     override val createdAt: LocalDateTime,
@@ -31,7 +33,7 @@ data class WeightTimeRecord(
 ) : Record
 
 data class DistanceTimeRecord(
-    override val id: Int,
+    override val id: Int = RECORD_EMPTY_ID,
     override val workoutId: Int,
     override val sportRecordType: SportRecordType,
     override val createdAt: LocalDateTime,
@@ -41,7 +43,7 @@ data class DistanceTimeRecord(
 ) : Record
 
 data class UnknownRecord(
-    override val id: Int,
+    override val id: Int = RECORD_EMPTY_ID,
     override val workoutId: Int,
     override val sportRecordType: SportRecordType,
     override val createdAt: LocalDateTime,
