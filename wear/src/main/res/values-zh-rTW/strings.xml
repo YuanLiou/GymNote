@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GymNote</string>
     <string name="add_workout_record">加入運動紀錄</string>
+    <string name="workout_record_item">紀錄</string>
 </resources>

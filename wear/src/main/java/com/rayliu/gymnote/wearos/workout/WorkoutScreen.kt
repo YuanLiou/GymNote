@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.SportsScore
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
+import androidx.wear.compose.material.AppCard
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.ButtonDefaults
 import androidx.wear.compose.material.Icon
@@ -53,7 +55,9 @@ fun WorkoutScreen(
         item {
             WearButton(
                 onClick = onAddButtonClicked,
-                modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp)
             )
         }
         item {
@@ -88,6 +92,40 @@ private fun WearButton(
                 modifier = iconModifier
             )
         }
+    }
+}
+
+@Composable
+private fun WearCard(
+    cardTitle: String?,
+    cardAppName: String?,
+    message: String?,
+    time: String,
+    onCardClicked: () -> Unit,
+    modifier: Modifier = Modifier,
+    iconModifier: Modifier = Modifier
+) {
+    AppCard(
+        title = {
+            Text(cardTitle.orEmpty())
+        },
+        appName = {
+            Text(text = cardAppName.orEmpty())
+        },
+        time = {
+            Text(text = time)
+        },
+        appImage = {
+            Icon(
+                imageVector = Icons.Rounded.SportsScore,
+                contentDescription = stringResource(id = R.string.workout_record_item),
+                modifier = iconModifier
+            )
+        },
+        onClick = onCardClicked,
+        modifier = modifier
+    ) {
+        Text(message.orEmpty())
     }
 }
 
@@ -132,6 +170,34 @@ private fun WearButtonPreview() {
     GymNoteTheme {
         WearButton(
             onClick = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            iconModifier = Modifier
+                .size(24.dp)
+                .wrapContentSize(align = Alignment.Center)
+        )
+    }
+}
+
+@Preview(
+    group = "Card",
+    widthDp = 300,
+    heightDp = PreviewConstants.WEAR_PREVIEW_ELEMENT_HEIGHT_DP,
+    apiLevel = PreviewConstants.WEAR_PREVIEW_API_LEVEL,
+    uiMode = PreviewConstants.WEAR_PREVIEW_UI_MODE,
+    backgroundColor = PreviewConstants.WEAR_PREVIEW_BACKGROUND_COLOR_BLACK,
+    showBackground = PreviewConstants.WEAR_PREVIEW_SHOW_BACKGROUND
+)
+@Composable
+private fun WearCardPreview() {
+    GymNoteTheme {
+        WearCard(
+            cardTitle = "cardTitle",
+            cardAppName = "cardSubTitle",
+            message = "message",
+            time = "time",
+            onCardClicked = {},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp),

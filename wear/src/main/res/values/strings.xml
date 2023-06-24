@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GymNote</string>
     <string name="add_workout_record">Add Workout Record</string>
+    <string name="workout_record_item">Record</string>
 </resources>
