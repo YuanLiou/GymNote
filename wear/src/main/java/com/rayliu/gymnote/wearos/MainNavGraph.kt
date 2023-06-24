@@ -1,5 +1,6 @@
 package com.rayliu.gymnote.wearos
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -97,15 +98,18 @@ fun NavGraphBuilder.mainNavGraph(
     }
 }
 
+@SuppressLint("ComposeViewModelInjection")
 @Composable
-fun scalingLazyListState(it: NavBackStackEntry): ScalingLazyListState {
-    val passedScrollType = it.arguments?.getSerializable(SCROLL_TYPE_NAV_ARGUMENT)
+fun scalingLazyListState(
+    navBackStackEntry: NavBackStackEntry
+): ScalingLazyListState {
+    val passedScrollType = navBackStackEntry.arguments?.getSerializable(SCROLL_TYPE_NAV_ARGUMENT)
     check(
         passedScrollType == DestinationScrollType.SCALING_LAZY_COLUMN_SCROLLING
     ) {
         "Scroll type must be DestinationScrollType.SCALING_LAZY_COLUMN_SCROLLING"
     }
-    val scrollViewModel: ScalingLazyListStateViewModel = viewModel(it)
+    val scrollViewModel: ScalingLazyListStateViewModel = viewModel(navBackStackEntry)
     return scrollViewModel.scrollState
 }
 

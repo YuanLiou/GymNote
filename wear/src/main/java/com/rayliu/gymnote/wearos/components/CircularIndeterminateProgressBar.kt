@@ -28,7 +28,7 @@ fun CircularIndeterminateProgressBar(
                 indicatorColor = MaterialTheme.colors.secondary,
                 trackColor = MaterialTheme.colors.onBackground.copy(alpha = 0.1f),
                 strokeWidth = 4.dp,
-                modifier = modifier.size(48.dp)
+                modifier = Modifier.size(48.dp)
             )
         }
     }

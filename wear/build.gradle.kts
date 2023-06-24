@@ -62,6 +62,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    lint {
+        htmlOutput = file("lint-report.html")
+        textReport = true
+    }
 }
 
 allprojects {
@@ -117,4 +121,5 @@ dependencies {
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
     wearApp(project(":wear"))
+    lintChecks(libs.slack.compose.linter)
 }
