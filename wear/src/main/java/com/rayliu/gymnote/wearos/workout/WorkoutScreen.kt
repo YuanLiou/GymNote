@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
@@ -23,6 +24,8 @@ import com.rayliu.commonmain.domain.model.SportRecordType
 import com.rayliu.commonmain.domain.model.WeightRepsRecord
 import com.rayliu.commonmain.domain.model.WeightTimeRecord
 import com.rayliu.commonmain.domain.model.WorkoutInfo
+import com.rayliu.commonmain.utils.toDateString
+import com.rayliu.commonmain.utils.toTimeString
 import com.rayliu.gymnote.R
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
 import com.rayliu.gymnote.wearos.theme.PreviewConstants
@@ -63,6 +66,7 @@ fun WorkoutScreen(
         item {
             Text(
                 workoutInfo?.name.orEmpty(),
+                textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.Center)
@@ -86,8 +90,9 @@ private fun ShowRecordCards(
     is WeightRepsRecord -> {
         WearCard(
             cardTitle = stringResource(id = R.string.workout_record_kg, record.weight.toString()),
-            cardAppName = record.lastModified.toString(),
+            cardAppName = record.lastModified.toDateString(),
             message = stringResource(id = R.string.workout_record_reps, record.reps.toString()),
+            time = record.lastModified.toTimeString(),
             onCardClicked = {
                 onCardClicked(record)
             }
@@ -96,8 +101,9 @@ private fun ShowRecordCards(
     is DistanceTimeRecord -> {
         WearCard(
             cardTitle = stringResource(id = R.string.workout_record_km, record.distance.toString()),
-            cardAppName = record.lastModified.toString(),
+            cardAppName = record.lastModified.toDateString(),
             message = record.time,
+            time = record.lastModified.toTimeString(),
             onCardClicked = {
                 onCardClicked(record)
             }
@@ -106,9 +112,9 @@ private fun ShowRecordCards(
     is WeightTimeRecord -> {
         WearCard(
             cardTitle = stringResource(id = R.string.workout_record_kg, record.weight.toString()),
-            cardAppName = record.lastModified.toString(),
+            cardAppName = record.lastModified.toDateString(),
             message = record.time,
-            time = "",
+            time = record.lastModified.toTimeString(),
             onCardClicked = {
                 onCardClicked(record)
             }
