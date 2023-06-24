@@ -19,7 +19,7 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
 
-  android-lint:
+  android-wear-lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -34,8 +34,8 @@ jobs:
           distribution: 'corretto'
           java-version: ${{ matrix.version }}
       - name: lintDebug
-        run: ./gradlew lint
+        run: ./gradlew :wear:lint
       - uses: actions/upload-artifact@v3
         with:
           name: android-lint-report
-          path: ~/**/build/reports/lint-results*.html
+          path: ~/**/wear/build/reports/lint-results*.html

@@ -65,7 +65,6 @@ android {
     lint {
         htmlOutput = file("lint-report.html")
         textReport = true
-        baseline = file("lint-baseline.xml")
     }
 }
 
