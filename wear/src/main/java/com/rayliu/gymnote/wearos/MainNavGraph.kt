@@ -115,12 +115,13 @@ fun NavGraphBuilder.mainNavGraph(
         val scalingLazyListState = scalingLazyListState(entry)
         val focusRequester = remember { FocusRequester() }
         val viewModel: WorkoutViewModel = koinNavViewModel()
+        viewModel.performPreScreenTasks()
 
         val context = LocalContext.current
         WorkoutScreen(
             listState = scalingLazyListState,
             focusRequester = focusRequester,
-            workoutId = viewModel.provideWorkoutId().toString(),
+            workoutInfo = viewModel.workoutInfo.value,
             onAddButtonClicked = {
                 Toast.makeText(
                     context,

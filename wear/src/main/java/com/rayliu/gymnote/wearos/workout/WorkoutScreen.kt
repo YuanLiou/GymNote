@@ -25,16 +25,21 @@ import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
 import com.google.android.horologist.compose.rotaryinput.rotaryWithScroll
+import com.rayliu.commonmain.domain.model.SportRecordType
+import com.rayliu.commonmain.domain.model.WorkoutInfo
 import com.rayliu.gymnote.R
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
 import com.rayliu.gymnote.wearos.theme.PreviewConstants
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 @OptIn(ExperimentalHorologistApi::class)
 @Composable
 fun WorkoutScreen(
     listState: ScalingLazyListState,
     focusRequester: FocusRequester,
-    workoutId: String,
+    workoutInfo: WorkoutInfo?,
     onAddButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -53,7 +58,7 @@ fun WorkoutScreen(
         }
         item {
             Text(
-                "Workout Id: $workoutId",
+                workoutInfo?.name.orEmpty(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.Center)
@@ -95,10 +100,18 @@ private fun WearButton(
 @Composable
 private fun WorkoutListScreenPreview() {
     GymNoteTheme {
+        val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
         WorkoutScreen(
             listState = ScalingLazyListState(),
             focusRequester = FocusRequester(),
-            workoutId = "999",
+            workoutInfo = WorkoutInfo(
+                id = 5108,
+                name = "Shannon Dominguez",
+                categoryId = 5955,
+                sportRecordType = SportRecordType.UNKNOWN,
+                createdAt = now,
+                lastModified = now
+            ),
             onAddButtonClicked = {},
             modifier = Modifier
         )

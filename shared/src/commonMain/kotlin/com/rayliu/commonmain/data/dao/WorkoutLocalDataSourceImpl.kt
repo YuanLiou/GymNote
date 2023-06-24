@@ -24,6 +24,10 @@ class WorkoutLocalDataSourceImpl(
             queries.getWorkoutsByCategoryId(id).executeAsList()
         }
 
+    override suspend fun getWorkout(id: Long): Workout? {
+        return queries.getWorkoutById(id).executeAsOneOrNull()
+    }
+
     override suspend fun updateInitialDate(initialDate: String) = withContext(ioDispatcher) {
         queries.updateInitalCreateDate(initialDate, initialDate)
     }
