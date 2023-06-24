@@ -1,6 +1,6 @@
 CREATE TABLE RecordDetails (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    workoutRecordId INTEGER NOT NULL,
+    workoutId INTEGER NOT NULL,
     createAt Text NOT NULL ,
     lastModified TEXT NOT NULL,
     sportRecordTypeId INTEGER NOT NULL,
@@ -19,7 +19,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 getRecordDetails:
 SELECT *
 FROM RecordDetails
-WHERE workoutRecordId = :id
+WHERE workoutId = :id
 ORDER BY createAt DESC;
 
 updateRecord:

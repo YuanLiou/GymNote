@@ -4,7 +4,7 @@ import kotlinx.datetime.LocalDateTime
 
 interface Record {
     val id: Int
-    val workoutRecordId: Int
+    val workoutId: Int
     val sportRecordType: SportRecordType
     val createdAt: LocalDateTime
     val lastModified: LocalDateTime
@@ -12,7 +12,7 @@ interface Record {
 
 data class WeightRepsRecord(
     override val id: Int,
-    override val workoutRecordId: Int,
+    override val workoutId: Int,
     override val sportRecordType: SportRecordType,
     override val createdAt: LocalDateTime,
     override val lastModified: LocalDateTime,
@@ -22,7 +22,7 @@ data class WeightRepsRecord(
 
 data class WeightTimeRecord(
     override val id: Int,
-    override val workoutRecordId: Int,
+    override val workoutId: Int,
     override val sportRecordType: SportRecordType,
     override val createdAt: LocalDateTime,
     override val lastModified: LocalDateTime,
@@ -32,7 +32,7 @@ data class WeightTimeRecord(
 
 data class DistanceTimeRecord(
     override val id: Int,
-    override val workoutRecordId: Int,
+    override val workoutId: Int,
     override val sportRecordType: SportRecordType,
     override val createdAt: LocalDateTime,
     override val lastModified: LocalDateTime,
@@ -42,7 +42,7 @@ data class DistanceTimeRecord(
 
 data class UnknownRecord(
     override val id: Int,
-    override val workoutRecordId: Int,
+    override val workoutId: Int,
     override val sportRecordType: SportRecordType,
     override val createdAt: LocalDateTime,
     override val lastModified: LocalDateTime

@@ -4,7 +4,6 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import com.rayliu.commonmain.data.database.AppDatabase
 import com.rayliu.commonmain.data.database.RecordDetails
-import com.rayliu.commonmain.data.database.WorkoutRecord
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -18,54 +17,34 @@ class WorkoutRecordDataSourceImpl(
     appDatabase: AppDatabase
 ) : WorkoutRecordDataSource {
 
-    private val recordQueries = appDatabase.workoutRecordQueries
     private val detailsQueries = appDatabase.recordDetailsQueries
 
-    override fun getWorkoutRecords(id: Long): Flow<List<WorkoutRecord>> {
-        return recordQueries.getWorkoutRecords(id).asFlow().mapToList(defaultDispatcher)
+    override fun getWorkoutRecordDetails(workoutId: Long): Flow<List<RecordDetails>> {
+        return detailsQueries.getRecordDetails(workoutId).asFlow().mapToList(defaultDispatcher)
     }
 
-    override fun getWorkoutRecordDetails(workoutRecordId: Long): Flow<List<RecordDetails>> {
-        return detailsQueries.getRecordDetails(workoutRecordId).asFlow().mapToList(defaultDispatcher)
-    }
-
-    override suspend fun insertRecordDetails(
-        workoutRecordId: Long,
-        createAt: String,
-        sportRecordTypeId: Long,
-        weight: Double?,
-        reps: Long?,
-        time: String?,
-        distance: Double?
-    ) = withContext(ioDispatcher) {
+    override suspend fun insertRecordDetails(recordDetails: RecordDetails) = withContext(ioDispatcher) {
         detailsQueries.insertNewRecord(
             id = null,
-            workoutRecordId = workoutRecordId,
-            createAt = createAt,
-            lastModified = createAt,
-            sportRecordTypeId = sportRecordTypeId,
-            weight = weight,
-            reps = reps,
-            time = time,
-            distance = distance
+            workoutId = recordDetails.workoutId,
+            createAt = recordDetails.createAt,
+            lastModified = recordDetails.createAt,
+            sportRecordTypeId = recordDetails.sportRecordTypeId,
+            weight = recordDetails.weight,
+            reps = recordDetails.reps,
+            time = recordDetails.time,
+            distance = recordDetails.distance
         )
     }
 
-    override suspend fun updateRecordDetails(
-        id: Long,
-        lastModified: String,
-        weight: Double?,
-        reps: Long?,
-        time: String?,
-        distance: Double?
-    ) = withContext(ioDispatcher) {
+    override suspend fun updateRecordDetails(recordDetails: RecordDetails) = withContext(ioDispatcher) {
         detailsQueries.updateRecord(
-            id = id,
-            lastModified = lastModified,
-            weight = weight,
-            reps = reps,
-            time = time,
-            distance = distance
+            id = recordDetails.id,
+            lastModified = recordDetails.lastModified,
+            weight = recordDetails.weight,
+            reps = recordDetails.reps,
+            time = recordDetails.time,
+            distance = recordDetails.distance
         )
     }
 

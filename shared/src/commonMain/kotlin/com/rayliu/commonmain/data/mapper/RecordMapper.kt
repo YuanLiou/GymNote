@@ -21,7 +21,7 @@ class RecordMapper(
         return when (val type = sportRecordTypeMapper.map(input.sportRecordTypeId.toInt())) {
             SportRecordType.WEIGHT_REPS -> WeightRepsRecord(
                 id = input.id.toInt(),
-                workoutRecordId = input.workoutRecordId.toInt(),
+                workoutId = input.workoutId.toInt(),
                 sportRecordType = type,
                 createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
                 lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
@@ -30,7 +30,7 @@ class RecordMapper(
             )
             SportRecordType.WEIGHT_TIME -> WeightTimeRecord(
                 id = input.id.toInt(),
-                workoutRecordId = input.workoutRecordId.toInt(),
+                workoutId = input.workoutId.toInt(),
                 sportRecordType = type,
                 createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
                 lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
@@ -39,7 +39,7 @@ class RecordMapper(
             )
             SportRecordType.DISTANCE_TIME -> DistanceTimeRecord(
                 id = input.id.toInt(),
-                workoutRecordId = input.workoutRecordId.toInt(),
+                workoutId = input.workoutId.toInt(),
                 sportRecordType = type,
                 createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
                 lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
@@ -48,7 +48,7 @@ class RecordMapper(
             )
             SportRecordType.UNKNOWN -> UnknownRecord(
                 id = input.id.toInt(),
-                workoutRecordId = input.workoutRecordId.toInt(),
+                workoutId = input.workoutId.toInt(),
                 sportRecordType = type,
                 createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
                 lastModified = dateTimeConverter.toLocalDateTime(input.lastModified)
@@ -63,5 +63,47 @@ class RecordListMapper(
 ) : NullableInputListMapper<RecordDetails, Record> {
     override fun map(input: List<RecordDetails>?): List<Record> {
         return input?.map { mapper.map(it) }.orEmpty()
+    }
+}
+
+// Domain Object To DTO
+@Factory
+class RecordDetailsMapper : Mapper<Record, RecordDetails> {
+    override fun map(input: Record): RecordDetails {
+        val weight = when (input) {
+            is WeightRepsRecord -> {
+                input.weight
+            }
+            is WeightTimeRecord -> {
+                input.weight
+            }
+            else -> {
+                null
+            }
+        }
+
+        val time = when (input) {
+            is WeightTimeRecord -> {
+                input.time
+            }
+            is DistanceTimeRecord -> {
+                input.time
+            }
+            else -> {
+                null
+            }
+        }
+
+        return RecordDetails(
+            id = -1,
+            workoutId = input.workoutId.toLong(),
+            createAt = input.createdAt.toString(),
+            lastModified = input.lastModified.toString(),
+            sportRecordTypeId = input.sportRecordType.id.toLong(),
+            weight = weight?.toDouble(),
+            reps = (input as? WeightRepsRecord)?.reps?.toLong(),
+            time = time,
+            distance = (input as? DistanceTimeRecord)?.distance?.toDouble()
+        )
     }
 }
