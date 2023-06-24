@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GymNote</string>
+    <string name="add_workout_record">Add Workout Record</string>
+    <string name="workout_record_item">Record</string>
+    <string name="workout_record_kg">%1$s Kg</string>
+    <string name="workout_record_reps">%1$s Reps</string>
+    <string name="workout_record_km">%1$s Km</string>
 </resources>

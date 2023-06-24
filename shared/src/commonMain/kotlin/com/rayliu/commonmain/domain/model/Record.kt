@@ -4,7 +4,7 @@ import kotlinx.datetime.LocalDateTime
 
 const val RECORD_EMPTY_ID = -1
 
-interface Record {
+sealed interface Record {
     val id: Int
     val workoutId: Int
     val sportRecordType: SportRecordType
