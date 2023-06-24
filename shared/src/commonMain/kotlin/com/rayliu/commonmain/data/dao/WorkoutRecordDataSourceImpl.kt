@@ -24,7 +24,9 @@ class WorkoutRecordDataSourceImpl(
         return detailsQueries.getRecordDetails(workoutId).asFlow().mapToList(defaultDispatcher)
     }
 
-    override suspend fun insertRecordDetails(recordDetails: RecordDetails) = withContext(ioDispatcher) {
+    override suspend fun insertRecordDetails(
+        recordDetails: RecordDetails
+    ) = withContext(ioDispatcher) {
         detailsQueries.insertNewRecord(
             id = null,
             workoutId = recordDetails.workoutId,
@@ -38,7 +40,9 @@ class WorkoutRecordDataSourceImpl(
         )
     }
 
-    override suspend fun updateRecordDetails(recordDetails: RecordDetails) = withContext(ioDispatcher) {
+    override suspend fun updateRecordDetails(
+        recordDetails: RecordDetails
+    ) = withContext(ioDispatcher) {
         if (recordDetails.id == RECORD_EMPTY_ID.toLong()) {
             return@withContext
         }
