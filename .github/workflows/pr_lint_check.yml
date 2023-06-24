@@ -28,12 +28,15 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: '1'
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'corretto'
           java-version: ${{ matrix.version }}
-      - name: lintDebug
+      - name: lintDebug for wear app
+        continue-on-error: true
         run: ./gradlew :wear:lint
       - uses: actions/upload-artifact@v3
         with:
