@@ -128,7 +128,7 @@ fun NavGraphBuilder.mainNavGraph(
             workoutInfo = viewModel.workoutInfo.value,
             records = records,
             onAddButtonClicked = {
-                navController.navigate(Screen.AddWorkout.withArguments(it.id.toString()))
+                navController.navigate(Screen.AddWorkoutRecord.withArguments(it.id.toString()))
             },
             onCardClicked = {
                 Toast.makeText(
@@ -141,7 +141,7 @@ fun NavGraphBuilder.mainNavGraph(
         RequestFocusOnResume(focusRequester)
     }
     composable(
-        route = Screen.AddWorkout.route + "/{$WORKOUT_ID_NAV_ARGUMENT}",
+        route = Screen.AddWorkoutRecord.route + "/{$WORKOUT_ID_NAV_ARGUMENT}",
         arguments = listOf(
             navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
                 type = NavType.EnumType(DestinationScrollType::class.java)
