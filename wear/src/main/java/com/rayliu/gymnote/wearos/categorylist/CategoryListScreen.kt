@@ -65,7 +65,7 @@ private fun CategoryList(
         sportCategories.forEach {
             item {
                 OptionItem(
-                    categoryName = it.name,
+                    title = it.name,
                     onItemClick = {
                         onCategoryClicked(it)
                     },

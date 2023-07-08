@@ -70,7 +70,7 @@ private fun WorkoutInfoList(
         workoutInfos.forEach {
             item {
                 OptionItem(
-                    categoryName = it.name,
+                    title = it.name,
                     onItemClick = {
                         onWorkoutClicked(it)
                     },

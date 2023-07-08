@@ -27,13 +27,17 @@ import com.rayliu.gymnote.wearos.theme.PreviewConstants
 
 @Composable
 fun OptionItem(
-    categoryName: String,
+    title: String,
     onItemClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Chip(modifier = modifier.fillMaxWidth(), onClick = onItemClick, label = {
-        Text(categoryName)
-    })
+    Chip(
+        modifier = modifier.fillMaxWidth(),
+        onClick = onItemClick,
+        label = {
+            Text(title)
+        }
+    )
 }
 
 @Composable
@@ -104,7 +108,7 @@ fun WearCard(
 )
 @Composable
 private fun OptionItemPreview() {
-    OptionItem(categoryName = "Testing Chip", onItemClick = {})
+    OptionItem(title = "Testing Chip", onItemClick = {})
 }
 
 @Preview(
