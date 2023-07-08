@@ -20,6 +20,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.navigation.composable
+import com.rayliu.gymnote.wearos.addworkout.AddWorkoutScreen
 import com.rayliu.gymnote.wearos.categorylist.CategoryListScreen
 import com.rayliu.gymnote.wearos.categorylist.CategoryListViewModel
 import com.rayliu.gymnote.wearos.navigation.CATEGORY_ID_NAV_ARGUMENT
@@ -126,11 +127,7 @@ fun NavGraphBuilder.mainNavGraph(
             workoutInfo = viewModel.workoutInfo.value,
             records = records,
             onAddButtonClicked = {
-                Toast.makeText(
-                    context,
-                    "Add button clicked",
-                    Toast.LENGTH_SHORT
-                ).show()
+                navController.navigate(Screen.AddWorkout.withArguments(it.id.toString()))
             },
             onCardClicked = {
                 Toast.makeText(
@@ -141,6 +138,25 @@ fun NavGraphBuilder.mainNavGraph(
             }
         )
         RequestFocusOnResume(focusRequester)
+    }
+    composable(
+        route = Screen.AddWorkout.route + "/{$WORKOUT_ID_NAV_ARGUMENT}",
+        arguments = listOf(
+            navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
+                type = NavType.EnumType(DestinationScrollType::class.java)
+                defaultValue = DestinationScrollType.NONE
+            },
+            navArgument(WORKOUT_ID_NAV_ARGUMENT) {
+                type = NavType.IntType
+                defaultValue = 0
+                nullable = false
+            }
+        )
+    ) { entry ->
+//        val focusRequester = remember { FocusRequester() }
+        val workoutId = entry.arguments?.getInt(WORKOUT_ID_NAV_ARGUMENT)
+        AddWorkoutScreen(workoutId.toString())
+//        RequestFocusOnResume(focusRequester)
     }
 }
 

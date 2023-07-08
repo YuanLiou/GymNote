@@ -17,6 +17,7 @@ import com.google.android.horologist.compose.rotaryinput.rotaryWithScroll
 import com.rayliu.commonmain.domain.model.SportCategory
 import com.rayliu.gymnote.wearos.components.CircularIndeterminateProgressBar
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
+import com.rayliu.gymnote.wearos.theme.PreviewConstants
 import com.rayliu.gymnote.wearos.ui.OptionItem
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -75,7 +76,12 @@ private fun CategoryList(
     }
 }
 
-@Preview
+@Preview(
+    group = "Screen Preview",
+    widthDp = PreviewConstants.WEAR_PREVIEW_DEVICE_WIDTH_DP,
+    heightDp = PreviewConstants.WEAR_PREVIEW_DEVICE_HEIGHT_DP,
+    apiLevel = PreviewConstants.WEAR_PREVIEW_API_LEVEL
+)
 @Composable
 private fun CategoryListScreenPreview() {
     GymNoteTheme {
