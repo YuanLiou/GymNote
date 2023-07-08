@@ -23,17 +23,21 @@ import com.rayliu.gymnote.wearos.addrecord.recordinput.AddTimeRecordScreen
 import com.rayliu.gymnote.wearos.addrecord.recordinput.AddWeightRecordScreen
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
 import com.rayliu.gymnote.wearos.theme.PreviewConstants
+import kotlinx.collections.immutable.ImmutableSet
+import kotlinx.collections.immutable.persistentSetOf
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AddRecordScreen(
     workoutId: String,
+    recordTypes: ImmutableSet<RecordType>,
+    onCancelButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier.fillMaxSize()
     ) {
-        val pageCounts = 5
+        val pageCounts = recordTypes.size + 1
         val state = rememberPagerState(
             initialPage = 0,
             initialPageOffsetFraction = 0f
@@ -45,47 +49,24 @@ fun AddRecordScreen(
             state = state,
             modifier = Modifier.fillMaxSize()
         ) { page ->
-            when (page) {
-                0 -> {
-                    AddWeightRecordScreen(
-                        modifier = Modifier
-                    )
+            for (recordType in recordTypes) {
+                if (page == recordTypes.indexOf(recordType)) {
+                    ShowScreenByRecordType(recordType)
                 }
-                1 -> {
-                    AddRepsRecordScreen(
-                        modifier = Modifier
-                    )
-                }
-                2 -> {
-                    AddTimeRecordScreen(
-                        modifier = Modifier
-                    )
-                }
-                3 -> {
-                    AddDistanceRecordScreen(
-                        modifier = Modifier
-                    )
-                }
-                4 -> {
-                    val context  = LocalContext.current
-                    AddRecordActionsScreen(
-                        onOKButtonClicked = {
-                            Toast.makeText(
-                                context,
-                                "Ok Pressed",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        },
-                        onCancelButtonClicked = {
-                            Toast.makeText(
-                                context,
-                                "Cancel Pressed",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        },
-                        modifier = Modifier
-                    )
-                }
+            }
+
+            if (page == pageCounts - 1) {
+                val context = LocalContext.current
+                FinalSubmitActions(
+                    onOkButtonClicked = {
+                        Toast.makeText(
+                            context,
+                            "Ok Pressed",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    },
+                    onCancelButtonClicked = onCancelButtonClicked
+                )
             }
         }
 
@@ -99,6 +80,49 @@ fun AddRecordScreen(
     }
 }
 
+@Composable
+private fun ShowScreenByRecordType(
+    recordType: RecordType
+) {
+    when (recordType) {
+        RecordType.WEIGHT -> {
+            AddWeightRecordScreen(
+                modifier = Modifier
+            )
+        }
+
+        RecordType.REPS -> {
+            AddRepsRecordScreen(
+                modifier = Modifier
+            )
+        }
+
+        RecordType.TIME -> {
+            AddTimeRecordScreen(
+                modifier = Modifier
+            )
+        }
+
+        RecordType.DISTANCE -> {
+            AddDistanceRecordScreen(
+                modifier = Modifier
+            )
+        }
+    }
+}
+
+@Composable
+private fun FinalSubmitActions(
+    onOkButtonClicked: () -> Unit,
+    onCancelButtonClicked: () -> Unit
+) {
+    AddRecordActionsScreen(
+        onOKButtonClicked = onOkButtonClicked,
+        onCancelButtonClicked = onCancelButtonClicked,
+        modifier = Modifier
+    )
+}
+
 @Preview(
     group = "Screen Preview",
     widthDp = PreviewConstants.WEAR_PREVIEW_DEVICE_WIDTH_DP,
@@ -108,6 +132,10 @@ fun AddRecordScreen(
 @Composable
 private fun AddRecordScreenPreview() {
     GymNoteTheme {
-        AddRecordScreen("123")
+        AddRecordScreen(
+            "123",
+            persistentSetOf(),
+            onCancelButtonClicked = {}
+        )
     }
 }

@@ -157,8 +157,13 @@ fun NavGraphBuilder.mainNavGraph(
         val viewModel: AddRecordViewModel = koinNavViewModel()
         viewModel.performPreScreenTasks()
         val workoutId = viewModel.workoutInfo.value?.id?.toString().orEmpty()
+        val recordTypes = viewModel.recordInputTypes.value
         AddRecordScreen(
-            workoutId = workoutId
+            workoutId = workoutId,
+            recordTypes = recordTypes,
+            onCancelButtonClicked = {
+                navController.popBackStack()
+            }
         )
     }
 }
