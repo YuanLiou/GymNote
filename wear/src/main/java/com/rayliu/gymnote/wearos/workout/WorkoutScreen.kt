@@ -44,7 +44,7 @@ fun WorkoutScreen(
     focusRequester: FocusRequester,
     workoutInfo: WorkoutInfo?,
     records: ImmutableList<Record>,
-    onAddButtonClicked: () -> Unit,
+    onAddButtonClicked: (WorkoutInfo) -> Unit,
     onCardClicked: (Record) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -56,12 +56,14 @@ fun WorkoutScreen(
         state = listState,
     ) {
         item {
-            WearButton(
-                onClick = onAddButtonClicked,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp)
-            )
+            workoutInfo?.let {
+                WearButton(
+                    onClick = { onAddButtonClicked(it) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp)
+                )
+            }
         }
         item {
             Text(

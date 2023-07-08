@@ -19,6 +19,7 @@ import com.google.android.horologist.compose.rotaryinput.rotaryWithScroll
 import com.rayliu.commonmain.domain.model.SportRecordType
 import com.rayliu.commonmain.domain.model.WorkoutInfo
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
+import com.rayliu.gymnote.wearos.theme.PreviewConstants
 import com.rayliu.gymnote.wearos.ui.OptionItem
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -69,7 +70,7 @@ private fun WorkoutInfoList(
         workoutInfos.forEach {
             item {
                 OptionItem(
-                    categoryName = it.name,
+                    title = it.name,
                     onItemClick = {
                         onWorkoutClicked(it)
                     },
@@ -80,7 +81,12 @@ private fun WorkoutInfoList(
     }
 }
 
-@Preview
+@Preview(
+    group = "Screen Preview",
+    widthDp = PreviewConstants.WEAR_PREVIEW_DEVICE_WIDTH_DP,
+    heightDp = PreviewConstants.WEAR_PREVIEW_DEVICE_HEIGHT_DP,
+    apiLevel = PreviewConstants.WEAR_PREVIEW_API_LEVEL
+)
 @Composable
 private fun WorkoutListScreenPreview() {
     GymNoteTheme {

@@ -4,10 +4,14 @@ import com.rayliu.commonmain.data.database.DateTimeConverter
 import com.rayliu.commonmain.data.database.RecordDetails
 import com.rayliu.commonmain.data.mapper.basic.Mapper
 import com.rayliu.commonmain.data.mapper.basic.NullableInputListMapper
+import com.rayliu.commonmain.domain.model.DistanceRecord
 import com.rayliu.commonmain.domain.model.DistanceTimeRecord
 import com.rayliu.commonmain.domain.model.Record
+import com.rayliu.commonmain.domain.model.RepsRecord
 import com.rayliu.commonmain.domain.model.SportRecordType
+import com.rayliu.commonmain.domain.model.TimeRecord
 import com.rayliu.commonmain.domain.model.UnknownRecord
+import com.rayliu.commonmain.domain.model.WeightRecord
 import com.rayliu.commonmain.domain.model.WeightRepsRecord
 import com.rayliu.commonmain.domain.model.WeightTimeRecord
 import org.koin.core.annotation.Factory
@@ -46,7 +50,39 @@ class RecordMapper(
                 distance = input.distance?.toFloat() ?: 0f,
                 time = input.time.orEmpty()
             )
-            SportRecordType.UNKNOWN -> UnknownRecord(
+            SportRecordType.WEIGHT -> WeightRecord(
+                id = input.id.toInt(),
+                workoutId = input.workoutId.toInt(),
+                sportRecordType = type,
+                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                weight = input.weight?.toFloat() ?: 0f
+            )
+            SportRecordType.REPS -> RepsRecord(
+                id = input.id.toInt(),
+                workoutId = input.workoutId.toInt(),
+                sportRecordType = type,
+                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                reps = input.reps?.toInt() ?: 0
+            )
+            SportRecordType.TIME -> TimeRecord(
+                id = input.id.toInt(),
+                workoutId = input.workoutId.toInt(),
+                sportRecordType = type,
+                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                time = input.time.orEmpty()
+            )
+            SportRecordType.DISTANCE -> DistanceRecord(
+                id = input.id.toInt(),
+                workoutId = input.workoutId.toInt(),
+                sportRecordType = type,
+                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                distance = input.distance?.toFloat() ?: 0f
+            )
+            else -> UnknownRecord(
                 id = input.id.toInt(),
                 workoutId = input.workoutId.toInt(),
                 sportRecordType = type,

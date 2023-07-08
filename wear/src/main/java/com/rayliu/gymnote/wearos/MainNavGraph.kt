@@ -20,6 +20,8 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.navigation.composable
+import com.rayliu.gymnote.wearos.addrecord.AddRecordScreen
+import com.rayliu.gymnote.wearos.addrecord.AddRecordViewModel
 import com.rayliu.gymnote.wearos.categorylist.CategoryListScreen
 import com.rayliu.gymnote.wearos.categorylist.CategoryListViewModel
 import com.rayliu.gymnote.wearos.navigation.CATEGORY_ID_NAV_ARGUMENT
@@ -126,11 +128,7 @@ fun NavGraphBuilder.mainNavGraph(
             workoutInfo = viewModel.workoutInfo.value,
             records = records,
             onAddButtonClicked = {
-                Toast.makeText(
-                    context,
-                    "Add button clicked",
-                    Toast.LENGTH_SHORT
-                ).show()
+                navController.navigate(Screen.AddWorkoutRecord.withArguments(it.id.toString()))
             },
             onCardClicked = {
                 Toast.makeText(
@@ -141,6 +139,32 @@ fun NavGraphBuilder.mainNavGraph(
             }
         )
         RequestFocusOnResume(focusRequester)
+    }
+    composable(
+        route = Screen.AddWorkoutRecord.route + "/{$WORKOUT_ID_NAV_ARGUMENT}",
+        arguments = listOf(
+            navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
+                type = NavType.EnumType(DestinationScrollType::class.java)
+                defaultValue = DestinationScrollType.NONE
+            },
+            navArgument(WORKOUT_ID_NAV_ARGUMENT) {
+                type = NavType.IntType
+                defaultValue = 0
+                nullable = false
+            }
+        )
+    ) {
+        val viewModel: AddRecordViewModel = koinNavViewModel()
+        viewModel.performPreScreenTasks()
+        val workoutId = viewModel.workoutInfo.value?.id?.toString().orEmpty()
+        val recordTypes = viewModel.recordInputTypes.value
+        AddRecordScreen(
+            workoutId = workoutId,
+            recordTypes = recordTypes,
+            onCancelButtonClicked = {
+                navController.popBackStack()
+            }
+        )
     }
 }
 

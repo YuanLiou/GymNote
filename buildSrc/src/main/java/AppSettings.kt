@@ -13,6 +13,6 @@ object AppSettings {
     const val wearVersionName = "0.1"
 
     // check: https://developer.android.com/jetpack/androidx/releases/compose-kotlin
-    const val kotlinCompilerExtensionVersion = "1.4.7"
+    const val kotlinCompilerExtensionVersion = "1.4.8"
     val javaVersion = JavaVersion.VERSION_17
 }

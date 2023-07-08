@@ -42,6 +42,42 @@ data class DistanceTimeRecord(
     val time: String
 ) : Record
 
+data class WeightRecord(
+    override val id: Int = RECORD_EMPTY_ID,
+    override val workoutId: Int,
+    override val sportRecordType: SportRecordType,
+    override val createdAt: LocalDateTime,
+    override val lastModified: LocalDateTime,
+    val weight: Float
+) : Record
+
+data class RepsRecord(
+    override val id: Int = RECORD_EMPTY_ID,
+    override val workoutId: Int,
+    override val sportRecordType: SportRecordType,
+    override val createdAt: LocalDateTime,
+    override val lastModified: LocalDateTime,
+    val reps: Int
+) : Record
+
+data class TimeRecord(
+    override val id: Int = RECORD_EMPTY_ID,
+    override val workoutId: Int,
+    override val sportRecordType: SportRecordType,
+    override val createdAt: LocalDateTime,
+    override val lastModified: LocalDateTime,
+    val time: String
+) : Record
+
+data class DistanceRecord(
+    override val id: Int = RECORD_EMPTY_ID,
+    override val workoutId: Int,
+    override val sportRecordType: SportRecordType,
+    override val createdAt: LocalDateTime,
+    override val lastModified: LocalDateTime,
+    val distance: Float
+) : Record
+
 data class UnknownRecord(
     override val id: Int = RECORD_EMPTY_ID,
     override val workoutId: Int,
