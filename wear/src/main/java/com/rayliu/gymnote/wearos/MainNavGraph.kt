@@ -20,7 +20,8 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.navigation.composable
-import com.rayliu.gymnote.wearos.addworkout.AddWorkoutScreen
+import com.rayliu.gymnote.wearos.addrecord.AddRecordScreen
+import com.rayliu.gymnote.wearos.addrecord.AddRecordViewModel
 import com.rayliu.gymnote.wearos.categorylist.CategoryListScreen
 import com.rayliu.gymnote.wearos.categorylist.CategoryListViewModel
 import com.rayliu.gymnote.wearos.navigation.CATEGORY_ID_NAV_ARGUMENT
@@ -152,11 +153,13 @@ fun NavGraphBuilder.mainNavGraph(
                 nullable = false
             }
         )
-    ) { entry ->
-//        val focusRequester = remember { FocusRequester() }
-        val workoutId = entry.arguments?.getInt(WORKOUT_ID_NAV_ARGUMENT)
-        AddWorkoutScreen(workoutId.toString())
-//        RequestFocusOnResume(focusRequester)
+    ) {
+        val viewModel: AddRecordViewModel = koinNavViewModel()
+        viewModel.performPreScreenTasks()
+        val workoutId = viewModel.workoutInfo.value?.id?.toString().orEmpty()
+        AddRecordScreen(
+            workoutId = workoutId
+        )
     }
 }
 

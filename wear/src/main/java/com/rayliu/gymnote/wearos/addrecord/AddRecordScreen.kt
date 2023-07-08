@@ -1,4 +1,4 @@
-package com.rayliu.gymnote.wearos.addworkout
+package com.rayliu.gymnote.wearos.addrecord
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -12,7 +12,7 @@ import com.rayliu.gymnote.wearos.theme.GymNoteTheme
 import com.rayliu.gymnote.wearos.theme.PreviewConstants
 
 @Composable
-fun AddWorkoutScreen(
+fun AddRecordScreen(
     workoutId: String,
     modifier: Modifier = Modifier
 ) {
@@ -32,8 +32,8 @@ fun AddWorkoutScreen(
     apiLevel = PreviewConstants.WEAR_PREVIEW_API_LEVEL
 )
 @Composable
-private fun AddWorkoutScreenPreview() {
+private fun AddRecordScreenPreview() {
     GymNoteTheme {
-        AddWorkoutScreen("123")
+        AddRecordScreen("123")
     }
 }
