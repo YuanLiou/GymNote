@@ -10,6 +10,14 @@ INSERT INTO SportRecordType
 VALUES (1, "Weight/Time");
 INSERT INTO SportRecordType
 VALUES (2, "Distance/Time");
+INSERT INTO SportRecordType
+VALUES (3, "Weight");
+INSERT INTO SportRecordType
+VALUES (4, "Reps");
+INSERT INTO SportRecordType
+VALUES (5, "Time");
+INSERT INTO SportRecordType
+VALUES (6, "Distance");
 
 -- Methods
 getSportRecordById:
