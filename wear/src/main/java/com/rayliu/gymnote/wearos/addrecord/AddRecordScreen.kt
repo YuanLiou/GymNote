@@ -29,7 +29,6 @@ import kotlinx.collections.immutable.persistentSetOf
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AddRecordScreen(
-    workoutId: String,
     recordTypes: ImmutableSet<RecordType>,
     onCancelButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
@@ -133,7 +132,6 @@ private fun FinalSubmitActions(
 private fun AddRecordScreenPreview() {
     GymNoteTheme {
         AddRecordScreen(
-            "123",
             persistentSetOf(),
             onCancelButtonClicked = {}
         )
