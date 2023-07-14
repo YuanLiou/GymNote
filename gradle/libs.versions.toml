@@ -18,7 +18,7 @@ lifecycle-runtime-ktx = "2.6.1"
 activity-compose = "1.7.2"
 # https://github.com/google/ksp/releases
 ksp = "1.8.22-1.0.11"
-horologist = "0.4.11"
+horologist = "0.4.12"
 wear-input = "1.2.0-alpha02"
 
 # kotlinx
