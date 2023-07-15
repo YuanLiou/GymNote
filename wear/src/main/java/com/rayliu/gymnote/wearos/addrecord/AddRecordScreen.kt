@@ -36,6 +36,7 @@ fun AddRecordScreen(
     recordTypes: ImmutableSet<RecordType>,
     focusRequester: FocusRequester,
     onCancelButtonClicked: () -> Unit,
+    onRequestFocus: @Composable (FocusRequester) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -56,6 +57,7 @@ fun AddRecordScreen(
             for (recordType in recordTypes) {
                 if (page == recordTypes.indexOf(recordType)) {
                     ShowScreenByRecordType(focusRequester, recordType)
+                    onRequestFocus(focusRequester)
                 }
             }
 
@@ -91,7 +93,14 @@ private fun ShowScreenByRecordType(
 ) {
     when (recordType) {
         RecordType.WEIGHT -> {
+            val defaultText = "0.0"
+            var userInput by remember { mutableStateOf(defaultText) }
             AddWeightRecordScreen(
+                focusRequester = focusRequester,
+                valueUnit = "kg",
+                defaultText = defaultText,
+                userInput = userInput,
+                onInputChanged = { userInput = it },
                 modifier = Modifier
             )
         }
@@ -154,6 +163,7 @@ private fun AddRecordScreenPreview() {
         AddRecordScreen(
             persistentSetOf(),
             focusRequester = FocusRequester(),
+            onRequestFocus = {},
             onCancelButtonClicked = {}
         )
     }

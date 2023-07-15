@@ -161,11 +161,13 @@ fun NavGraphBuilder.mainNavGraph(
         AddRecordScreen(
             recordTypes = recordTypes,
             focusRequester = focusRequester,
+            onRequestFocus = {
+                RequestFocusOnResume(focusRequester)
+            },
             onCancelButtonClicked = {
                 navController.popBackStack()
             }
         )
-        RequestFocusOnResume(focusRequester)
     }
 }
 
