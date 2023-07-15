@@ -154,15 +154,18 @@ fun NavGraphBuilder.mainNavGraph(
             }
         )
     ) {
+        val focusRequester = remember { FocusRequester() }
         val viewModel: AddRecordViewModel = koinNavViewModel()
         viewModel.performPreScreenTasks()
         val recordTypes = viewModel.recordInputTypes.value
         AddRecordScreen(
             recordTypes = recordTypes,
+            focusRequester = focusRequester,
             onCancelButtonClicked = {
                 navController.popBackStack()
             }
         )
+        RequestFocusOnResume(focusRequester)
     }
 }
 

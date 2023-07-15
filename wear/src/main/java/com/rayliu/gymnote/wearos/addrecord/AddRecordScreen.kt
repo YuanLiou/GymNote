@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,6 +31,7 @@ import kotlinx.collections.immutable.persistentSetOf
 @Composable
 fun AddRecordScreen(
     recordTypes: ImmutableSet<RecordType>,
+    focusRequester: FocusRequester,
     onCancelButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -50,7 +52,7 @@ fun AddRecordScreen(
         ) { page ->
             for (recordType in recordTypes) {
                 if (page == recordTypes.indexOf(recordType)) {
-                    ShowScreenByRecordType(recordType)
+                    ShowScreenByRecordType(focusRequester, recordType)
                 }
             }
 
@@ -81,7 +83,8 @@ fun AddRecordScreen(
 
 @Composable
 private fun ShowScreenByRecordType(
-    recordType: RecordType
+    focusRequester: FocusRequester,
+    recordType: RecordType,
 ) {
     when (recordType) {
         RecordType.WEIGHT -> {
@@ -104,6 +107,7 @@ private fun ShowScreenByRecordType(
 
         RecordType.DISTANCE -> {
             AddDistanceRecordScreen(
+                focusRequester = focusRequester,
                 modifier = Modifier
             )
         }
@@ -133,6 +137,7 @@ private fun AddRecordScreenPreview() {
     GymNoteTheme {
         AddRecordScreen(
             persistentSetOf(),
+            focusRequester = FocusRequester(),
             onCancelButtonClicked = {}
         )
     }
