@@ -97,7 +97,14 @@ private fun ShowScreenByRecordType(
         }
 
         RecordType.REPS -> {
+            val defaultText = "0"
+            var userInput by remember { mutableStateOf(defaultText) }
             AddRepsRecordScreen(
+                focusRequester = focusRequester,
+                valueUnit = "reps",
+                defaultText = defaultText,
+                userInput = userInput,
+                onInputChanged = { userInput = it },
                 modifier = Modifier
             )
         }
