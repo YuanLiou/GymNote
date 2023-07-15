@@ -25,12 +25,12 @@ import kotlin.math.roundToInt
 @Composable
 fun ValueInput(
     focusRequester: FocusRequester,
-    onUserInputText: (CharSequence?, minimumValue: Int) -> Unit,
+    currentInput: String,
+    isMinusValueEnabled: Boolean,
+    onUserInputText: (CharSequence?) -> Unit,
     onUserClickPlusButton: (String) -> Unit,
     onUserClickMinorButton: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    currentInput: String = "0",
-    minimumValue: Int = 0
+    modifier: Modifier = Modifier
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -43,7 +43,7 @@ fun ValueInput(
                 val accumulatedValue = it.roundToInt()
                 if (accumulatedValue > 0) {
                     onUserClickPlusButton(currentInput)
-                } else if (accumulatedValue < 0 && currentInput.toInt() > minimumValue) {
+                } else if (accumulatedValue < 0) {
                     onUserClickMinorButton(currentInput)
                 }
             }
@@ -60,15 +60,13 @@ fun ValueInput(
 
         WearEditText(
             text = currentInput,
-            onUserInputText = {
-                onUserInputText(it, minimumValue)
-            },
+            onUserInputText = onUserInputText,
             fontSize = 20.sp
         )
 
         CompactButton(
             onClick = { onUserClickMinorButton(currentInput) },
-            enabled = currentInput.toInt() > minimumValue,
+            enabled = isMinusValueEnabled,
             modifier = Modifier.padding(top = 6.dp)
         ) {
             Image(
@@ -90,9 +88,11 @@ fun ValueInputPreview() {
     GymNoteTheme {
         ValueInput(
             focusRequester = FocusRequester(),
-            onUserInputText = { _, _ -> },
+            currentInput = "0",
+            isMinusValueEnabled = true,
+            onUserInputText = {},
             onUserClickPlusButton = {},
-            onUserClickMinorButton = {},
+            onUserClickMinorButton = {}
         )
     }
 }

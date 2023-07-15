@@ -32,6 +32,7 @@ fun AddDistanceRecordScreen(
         modifier = modifier.fillMaxSize()
     ) {
         val step = 1
+        val minimumValue = 0
         val defaultText = "0"
         var userInput by remember { mutableStateOf(defaultText) }
 
@@ -41,7 +42,8 @@ fun AddDistanceRecordScreen(
         ValueInput(
             currentInput = userInput,
             focusRequester = focusRequester,
-            onUserInputText = { result, minimumValue ->
+            isMinusValueEnabled = userInput.toInt() > minimumValue,
+            onUserInputText = { result ->
                 val newInput = result?.toString()?.trim() ?: defaultText
                 if (InputUtils.isNumeric(newInput) && newInput.toInt() >= minimumValue) {
                     userInput = newInput
@@ -53,7 +55,10 @@ fun AddDistanceRecordScreen(
                 userInput = (it.toInt() + step).toString()
             },
             onUserClickMinorButton = {
-                userInput = (it.toInt() - step).toString()
+                val value = it.toInt()
+                if (value > minimumValue) {
+                    userInput = (value - step).toString()
+                }
             }
         )
     }
