@@ -9,10 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Undo
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -33,6 +29,10 @@ import com.rayliu.gymnote.wearos.utils.InputUtils
 @Composable
 fun AddDistanceRecordScreen(
     focusRequester: FocusRequester,
+    valueUnit: String,
+    defaultText: String,
+    userInput: String,
+    onInputChanged: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -40,10 +40,8 @@ fun AddDistanceRecordScreen(
         horizontalArrangement = Arrangement.Center,
         modifier = modifier.fillMaxSize()
     ) {
-        val step = 1
-        val minimumValue = 0
-        val defaultText = "0"
-        var userInput by remember { mutableStateOf(defaultText) }
+        val step = 0.5f
+        val minimumValue = 0.0f
 
         val context = LocalContext.current
         val waringText = stringResource(id = R.string.warning_input_type_is_not_number)
@@ -58,7 +56,7 @@ fun AddDistanceRecordScreen(
             verticalArrangement = Arrangement.Center
         ) {
             CompactButton(
-                onClick = { userInput = defaultText },
+                onClick = { onInputChanged(defaultText) },
                 modifier = Modifier.alpha(undoButtonVisibility)
             ) {
                 Icon(
@@ -68,29 +66,29 @@ fun AddDistanceRecordScreen(
             }
         }
 
-
         ValueInput(
             currentInput = userInput,
             focusRequester = focusRequester,
-            isMinusValueEnabled = userInput.toInt() > minimumValue,
+            isMinusValueEnabled = userInput.toFloat() > minimumValue,
             onUserInputText = { result ->
                 val newInput = result?.toString()?.trim() ?: defaultText
-                if (InputUtils.isNumeric(newInput) && newInput.toInt() >= minimumValue) {
-                    userInput = newInput
+                if (InputUtils.isNumeric(newInput) && newInput.toFloat() >= minimumValue) {
+                    onInputChanged(newInput)
                 } else {
                     Toast.makeText(context, waringText, Toast.LENGTH_SHORT).show()
                 }
             },
             onUserClickPlusButton = {
-                userInput = (it.toInt() + step).toString()
+                val newInput = (it.toFloat() + step).toString()
+                onInputChanged(newInput)
             },
             onUserClickMinorButton = {
-                val value = it.toInt()
+                val value = it.toFloat()
                 if (value > minimumValue) {
-                    userInput = (value - step).toString()
+                    val newInput = (value - step).toString()
+                    onInputChanged(newInput)
                 }
-            },
-            modifier = Modifier
+            }
         )
 
         Column(
@@ -105,7 +103,7 @@ fun AddDistanceRecordScreen(
                 ) {}
 
                 Text(
-                    "m",
+                    valueUnit,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.align(Alignment.Center)
                 )
@@ -124,7 +122,11 @@ fun AddDistanceRecordScreen(
 private fun AddDistanceRecordPreview() {
     GymNoteTheme {
         AddDistanceRecordScreen(
-            FocusRequester()
+            FocusRequester(),
+            valueUnit = "km",
+            defaultText = "0",
+            userInput = "0",
+            onInputChanged = {}
         )
     }
 }
