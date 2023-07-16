@@ -53,7 +53,9 @@ fun WearApp(
                         }
 
                     key(backStackEntry.destination.route) {
-                        TimeText(modifier = timeTextModifier ?: Modifier)
+                        TimeText(
+                            modifier = timeTextModifier ?: Modifier
+                        )
                     }
                 }
             },

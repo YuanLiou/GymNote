@@ -22,18 +22,23 @@ import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.navigation.composable
 import com.rayliu.gymnote.wearos.addrecord.AddRecordScreen
 import com.rayliu.gymnote.wearos.addrecord.AddRecordViewModel
+import com.rayliu.gymnote.wearos.addrecord.recordinput.DEFAULT_TIME_RECORD
 import com.rayliu.gymnote.wearos.categorylist.CategoryListScreen
 import com.rayliu.gymnote.wearos.categorylist.CategoryListViewModel
 import com.rayliu.gymnote.wearos.navigation.CATEGORY_ID_NAV_ARGUMENT
 import com.rayliu.gymnote.wearos.navigation.DestinationScrollType
 import com.rayliu.gymnote.wearos.navigation.SCROLL_TYPE_NAV_ARGUMENT
 import com.rayliu.gymnote.wearos.navigation.Screen
+import com.rayliu.gymnote.wearos.navigation.TIME_PICKER_NAV_ARGUMENT
+import com.rayliu.gymnote.wearos.navigation.TIME_PICKER_RESULT_NAV_ARGUMENT
 import com.rayliu.gymnote.wearos.navigation.WORKOUT_ID_NAV_ARGUMENT
+import com.rayliu.gymnote.wearos.timepicker.TimePickerScreen
 import com.rayliu.gymnote.wearos.workout.WorkoutScreen
 import com.rayliu.gymnote.wearos.workout.WorkoutViewModel
 import com.rayliu.gymnote.wearos.workoutlist.WorkoutListScreen
 import com.rayliu.gymnote.wearos.workoutlist.WorkoutListViewModel
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.datetime.toLocalTime
 import org.koin.androidx.compose.navigation.koinNavViewModel
 
 fun NavGraphBuilder.mainNavGraph(
@@ -153,17 +158,61 @@ fun NavGraphBuilder.mainNavGraph(
                 nullable = false
             }
         )
-    ) {
+    ) { entry ->
         val focusRequester = remember { FocusRequester() }
         val viewModel: AddRecordViewModel = koinNavViewModel()
         viewModel.performPreScreenTasks()
+
         val recordTypes = viewModel.recordInputTypes.value
+        val userInputTimeRecord =
+            entry.savedStateHandle.get<String>(TIME_PICKER_RESULT_NAV_ARGUMENT)
+        viewModel.setTimeRecord(userInputTimeRecord)
+        val timeRecord = viewModel.timeRecord.value ?: DEFAULT_TIME_RECORD
+
         AddRecordScreen(
             recordTypes = recordTypes,
             focusRequester = focusRequester,
+            onRequestFocus = {
+                RequestFocusOnResume(it)
+            },
             onCancelButtonClicked = {
                 navController.popBackStack()
+            },
+            onTimeAdjustButtonClicked = {
+                navController.navigate(
+                    Screen.TimePickerScreen.route + "?$TIME_PICKER_NAV_ARGUMENT=$timeRecord"
+                )
+            },
+            userInputTimeRecord = timeRecord
+        )
+    }
+    composable(
+        route = Screen.TimePickerScreen.route +
+            "?$TIME_PICKER_NAV_ARGUMENT={$TIME_PICKER_NAV_ARGUMENT}",
+        arguments = listOf(
+            navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
+                type = NavType.EnumType(DestinationScrollType::class.java)
+                defaultValue = DestinationScrollType.NONE
+            },
+            navArgument(TIME_PICKER_NAV_ARGUMENT) {
+                type = NavType.StringType
+                defaultValue = DEFAULT_TIME_RECORD
+                nullable = true
             }
+        )
+    ) { entry ->
+        val focusRequester = remember { FocusRequester() }
+        val defaultTime = entry.arguments?.getString(TIME_PICKER_NAV_ARGUMENT)
+        TimePickerScreen(
+            focusRequester = focusRequester,
+            onTimeConfirm = { resultTime ->
+                navController.previousBackStackEntry
+                    ?.savedStateHandle
+                    ?.set(TIME_PICKER_RESULT_NAV_ARGUMENT, resultTime)
+
+                navController.popBackStack()
+            },
+            defaultTime = defaultTime?.toLocalTime()
         )
         RequestFocusOnResume(focusRequester)
     }

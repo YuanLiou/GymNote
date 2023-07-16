@@ -8,7 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -33,6 +36,9 @@ fun AddRecordScreen(
     recordTypes: ImmutableSet<RecordType>,
     focusRequester: FocusRequester,
     onCancelButtonClicked: () -> Unit,
+    onTimeAdjustButtonClicked: () -> Unit,
+    onRequestFocus: @Composable (FocusRequester) -> Unit,
+    userInputTimeRecord: String?,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -52,7 +58,13 @@ fun AddRecordScreen(
         ) { page ->
             for (recordType in recordTypes) {
                 if (page == recordTypes.indexOf(recordType)) {
-                    ShowScreenByRecordType(focusRequester, recordType)
+                    ShowScreenByRecordType(
+                        focusRequester,
+                        recordType,
+                        onTimeAdjustButtonClicked,
+                        userInputTimeRecord
+                    )
+                    onRequestFocus(focusRequester)
                 }
             }
 
@@ -85,29 +97,54 @@ fun AddRecordScreen(
 private fun ShowScreenByRecordType(
     focusRequester: FocusRequester,
     recordType: RecordType,
+    onTimeAdjustButtonClicked: () -> Unit,
+    userInputTimeRecord: String?
 ) {
     when (recordType) {
         RecordType.WEIGHT -> {
+            val defaultText = "0.0"
+            var userInput by remember { mutableStateOf(defaultText) }
             AddWeightRecordScreen(
+                focusRequester = focusRequester,
+                valueUnit = "kg",
+                defaultText = defaultText,
+                userInput = userInput,
+                onInputChanged = { userInput = it },
                 modifier = Modifier
             )
         }
 
         RecordType.REPS -> {
+            val defaultText = "0"
+            var userInput by remember { mutableStateOf(defaultText) }
             AddRepsRecordScreen(
+                focusRequester = focusRequester,
+                valueUnit = "reps",
+                defaultText = defaultText,
+                userInput = userInput,
+                onInputChanged = { userInput = it },
                 modifier = Modifier
             )
         }
 
         RecordType.TIME -> {
             AddTimeRecordScreen(
-                modifier = Modifier
+                onAdjustButtonClicked = onTimeAdjustButtonClicked,
+                focusRequester = focusRequester,
+                modifier = Modifier,
+                defaultText = userInputTimeRecord
             )
         }
 
         RecordType.DISTANCE -> {
+            val defaultText = "0.0"
+            var userInput by remember { mutableStateOf(defaultText) }
             AddDistanceRecordScreen(
                 focusRequester = focusRequester,
+                valueUnit = "km",
+                defaultText = defaultText,
+                userInput = userInput,
+                onInputChanged = { userInput = it },
                 modifier = Modifier
             )
         }
@@ -138,7 +175,10 @@ private fun AddRecordScreenPreview() {
         AddRecordScreen(
             persistentSetOf(),
             focusRequester = FocusRequester(),
-            onCancelButtonClicked = {}
+            onRequestFocus = {},
+            onCancelButtonClicked = {},
+            onTimeAdjustButtonClicked = {},
+            userInputTimeRecord = null
         )
     }
 }
