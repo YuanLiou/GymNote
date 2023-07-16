@@ -120,6 +120,7 @@ private fun ShowScreenByRecordType(
 
         RecordType.TIME -> {
             AddTimeRecordScreen(
+                onAdjustButtonClicked = {},
                 modifier = Modifier
             )
         }

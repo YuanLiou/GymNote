@@ -6,4 +6,5 @@
     <string name="workout_record_reps">%1$s 下</string>
     <string name="workout_record_km">%1$s 公里</string>
     <string name="warning_input_type_is_not_number">請輸入數字</string>
+    <string name="button_action_adjust">調整</string>
 </resources>
