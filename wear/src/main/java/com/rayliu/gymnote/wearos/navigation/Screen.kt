@@ -9,6 +9,7 @@ sealed class Screen(val route: String) {
     object WorkoutList : Screen("workout_list")
     object Workout : Screen("workout")
     object AddWorkoutRecord : Screen("add_workout_record")
+    object TimePickerScreen : Screen("time_picker_screen")
 
     fun withArguments(vararg arguments: String): String {
         return buildString {

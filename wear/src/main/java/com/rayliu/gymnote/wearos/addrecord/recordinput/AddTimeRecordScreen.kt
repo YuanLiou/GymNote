@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,6 +22,7 @@ import com.rayliu.gymnote.wearos.theme.PreviewConstants
 
 @Composable
 fun AddTimeRecordScreen(
+    focusRequester: FocusRequester,
     onAdjustButtonClicked: () -> Unit,
     modifier: Modifier = Modifier,
     defaultText: String = "00:00:00"
@@ -27,7 +30,9 @@ fun AddTimeRecordScreen(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .focusRequester(focusRequester)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -57,7 +62,8 @@ fun AddTimeRecordScreen(
 private fun AddTimeRecordPreview() {
     GymNoteTheme {
         AddTimeRecordScreen(
-            onAdjustButtonClicked = {}
+            onAdjustButtonClicked = {},
+            focusRequester = FocusRequester()
         )
     }
 }

@@ -36,6 +36,7 @@ fun AddRecordScreen(
     recordTypes: ImmutableSet<RecordType>,
     focusRequester: FocusRequester,
     onCancelButtonClicked: () -> Unit,
+    onTimeAdjustButtonClicked: () -> Unit,
     onRequestFocus: @Composable (FocusRequester) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -56,7 +57,11 @@ fun AddRecordScreen(
         ) { page ->
             for (recordType in recordTypes) {
                 if (page == recordTypes.indexOf(recordType)) {
-                    ShowScreenByRecordType(focusRequester, recordType)
+                    ShowScreenByRecordType(
+                        focusRequester,
+                        recordType,
+                        onTimeAdjustButtonClicked
+                    )
                     onRequestFocus(focusRequester)
                 }
             }
@@ -90,6 +95,7 @@ fun AddRecordScreen(
 private fun ShowScreenByRecordType(
     focusRequester: FocusRequester,
     recordType: RecordType,
+    onTimeAdjustButtonClicked: () -> Unit
 ) {
     when (recordType) {
         RecordType.WEIGHT -> {
@@ -120,7 +126,8 @@ private fun ShowScreenByRecordType(
 
         RecordType.TIME -> {
             AddTimeRecordScreen(
-                onAdjustButtonClicked = {},
+                onAdjustButtonClicked = onTimeAdjustButtonClicked,
+                focusRequester = focusRequester,
                 modifier = Modifier
             )
         }
@@ -165,7 +172,8 @@ private fun AddRecordScreenPreview() {
             persistentSetOf(),
             focusRequester = FocusRequester(),
             onRequestFocus = {},
-            onCancelButtonClicked = {}
+            onCancelButtonClicked = {},
+            onTimeAdjustButtonClicked = {}
         )
     }
 }

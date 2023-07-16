@@ -29,6 +29,7 @@ import com.rayliu.gymnote.wearos.navigation.DestinationScrollType
 import com.rayliu.gymnote.wearos.navigation.SCROLL_TYPE_NAV_ARGUMENT
 import com.rayliu.gymnote.wearos.navigation.Screen
 import com.rayliu.gymnote.wearos.navigation.WORKOUT_ID_NAV_ARGUMENT
+import com.rayliu.gymnote.wearos.timepicker.TimePickerScreen
 import com.rayliu.gymnote.wearos.workout.WorkoutScreen
 import com.rayliu.gymnote.wearos.workout.WorkoutViewModel
 import com.rayliu.gymnote.wearos.workoutlist.WorkoutListScreen
@@ -162,12 +163,26 @@ fun NavGraphBuilder.mainNavGraph(
             recordTypes = recordTypes,
             focusRequester = focusRequester,
             onRequestFocus = {
-                RequestFocusOnResume(focusRequester)
+                RequestFocusOnResume(it)
             },
             onCancelButtonClicked = {
                 navController.popBackStack()
+            },
+            onTimeAdjustButtonClicked = {
+                navController.navigate(Screen.TimePickerScreen.route)
             }
         )
+    }
+    composable(
+        route = Screen.TimePickerScreen.route,
+        arguments = listOf(
+            navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
+                type = NavType.EnumType(DestinationScrollType::class.java)
+                defaultValue = DestinationScrollType.NONE
+            }
+        )
+    ) {
+        TimePickerScreen()
     }
 }
 
