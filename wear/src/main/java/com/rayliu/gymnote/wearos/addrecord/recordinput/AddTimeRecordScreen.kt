@@ -20,14 +20,14 @@ import com.rayliu.gymnote.R
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
 import com.rayliu.gymnote.wearos.theme.PreviewConstants
 
-const val DEFAULT_TIME = "00:00:00"
+const val DEFAULT_TIME_RECORD = "00:00:00"
 
 @Composable
 fun AddTimeRecordScreen(
     focusRequester: FocusRequester,
     onAdjustButtonClicked: () -> Unit,
     modifier: Modifier = Modifier,
-    defaultText: String? = DEFAULT_TIME
+    defaultText: String? = DEFAULT_TIME_RECORD
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -40,7 +40,7 @@ fun AddTimeRecordScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                defaultText ?: DEFAULT_TIME,
+                defaultText ?: DEFAULT_TIME_RECORD,
                 fontSize = 22.sp
             )
             CompactChip(

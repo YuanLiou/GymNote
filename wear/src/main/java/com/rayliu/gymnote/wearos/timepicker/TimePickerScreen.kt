@@ -12,7 +12,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.android.horologist.composables.TimePicker
-import com.rayliu.gymnote.wearos.addrecord.recordinput.DEFAULT_TIME
+import com.rayliu.gymnote.wearos.addrecord.recordinput.DEFAULT_TIME_RECORD
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
 import com.rayliu.gymnote.wearos.theme.PreviewConstants
 import kotlinx.datetime.LocalTime
@@ -32,7 +32,7 @@ fun TimePickerScreen(
         modifier = modifier.fillMaxSize()
     ) {
         val localTime =
-            defaultTime?.toJavaLocalTime() ?: DEFAULT_TIME.toLocalTime().toJavaLocalTime()
+            defaultTime?.toJavaLocalTime() ?: DEFAULT_TIME_RECORD.toLocalTime().toJavaLocalTime()
         TimePicker(
             time = localTime,
             onTimeConfirm = {
@@ -42,7 +42,7 @@ fun TimePickerScreen(
                 onTimeConfirm("$hourText:$minuteText:$secondText")
             },
             modifier = Modifier
-                .padding(4.dp)
+                .padding(6.dp)
                 .focusRequester(focusRequester)
         )
     }

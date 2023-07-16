@@ -5,7 +5,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rayliu.commonmain.domain.model.SportRecordType
-import com.rayliu.commonmain.domain.model.WorkoutInfo
 import com.rayliu.commonmain.domain.usecase.GetWorkoutInfo
 import com.rayliu.gymnote.wearos.navigation.WORKOUT_ID_NAV_ARGUMENT
 import kotlinx.collections.immutable.ImmutableSet
@@ -21,15 +20,12 @@ class AddRecordViewModel(
 
     private val workoutId: Int = savedStateHandle[WORKOUT_ID_NAV_ARGUMENT] ?: -1
 
-    val workoutInfo = mutableStateOf<WorkoutInfo?>(null)
     val recordInputTypes = mutableStateOf<ImmutableSet<RecordType>>(persistentSetOf())
+    val timeRecord = mutableStateOf<String?>(null)
 
     fun performPreScreenTasks() {
         viewModelScope.launch {
-            val info = getWorkoutInfo(workoutId).also {
-                workoutInfo.value = it
-            } ?: return@launch
-
+            val info = getWorkoutInfo(workoutId) ?: return@launch
             when (info.sportRecordType) {
                 SportRecordType.WEIGHT_REPS -> {
                     recordInputTypes.value = persistentSetOf(RecordType.WEIGHT, RecordType.REPS)
@@ -55,5 +51,9 @@ class AddRecordViewModel(
                 else -> {}
             }
         }
+    }
+
+    fun setTimeRecord(userInputTimeRecord: String?) {
+        timeRecord.value = userInputTimeRecord
     }
 }
