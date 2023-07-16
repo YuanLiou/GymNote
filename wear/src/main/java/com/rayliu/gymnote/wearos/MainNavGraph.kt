@@ -28,6 +28,7 @@ import com.rayliu.gymnote.wearos.navigation.CATEGORY_ID_NAV_ARGUMENT
 import com.rayliu.gymnote.wearos.navigation.DestinationScrollType
 import com.rayliu.gymnote.wearos.navigation.SCROLL_TYPE_NAV_ARGUMENT
 import com.rayliu.gymnote.wearos.navigation.Screen
+import com.rayliu.gymnote.wearos.navigation.TIME_PICKER_RESULT_NAV_ARGUMENT
 import com.rayliu.gymnote.wearos.navigation.WORKOUT_ID_NAV_ARGUMENT
 import com.rayliu.gymnote.wearos.timepicker.TimePickerScreen
 import com.rayliu.gymnote.wearos.workout.WorkoutScreen
@@ -158,7 +159,10 @@ fun NavGraphBuilder.mainNavGraph(
         val focusRequester = remember { FocusRequester() }
         val viewModel: AddRecordViewModel = koinNavViewModel()
         viewModel.performPreScreenTasks()
+
         val recordTypes = viewModel.recordInputTypes.value
+        val userInputTimeRecord = it.savedStateHandle.get<String>(TIME_PICKER_RESULT_NAV_ARGUMENT)
+
         AddRecordScreen(
             recordTypes = recordTypes,
             focusRequester = focusRequester,
@@ -170,7 +174,8 @@ fun NavGraphBuilder.mainNavGraph(
             },
             onTimeAdjustButtonClicked = {
                 navController.navigate(Screen.TimePickerScreen.route)
-            }
+            },
+            userInputTimeRecord = userInputTimeRecord
         )
     }
     composable(
@@ -182,7 +187,18 @@ fun NavGraphBuilder.mainNavGraph(
             }
         )
     ) {
-        TimePickerScreen()
+        val focusRequester = remember { FocusRequester() }
+        TimePickerScreen(
+            focusRequester = focusRequester,
+            onTimeConfirm = {
+                navController.previousBackStackEntry
+                    ?.savedStateHandle
+                    ?.set(TIME_PICKER_RESULT_NAV_ARGUMENT, it)
+
+                navController.popBackStack()
+            }
+        )
+        RequestFocusOnResume(focusRequester)
     }
 }
 

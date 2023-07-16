@@ -38,6 +38,7 @@ fun AddRecordScreen(
     onCancelButtonClicked: () -> Unit,
     onTimeAdjustButtonClicked: () -> Unit,
     onRequestFocus: @Composable (FocusRequester) -> Unit,
+    userInputTimeRecord: String?,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -60,7 +61,8 @@ fun AddRecordScreen(
                     ShowScreenByRecordType(
                         focusRequester,
                         recordType,
-                        onTimeAdjustButtonClicked
+                        onTimeAdjustButtonClicked,
+                        userInputTimeRecord
                     )
                     onRequestFocus(focusRequester)
                 }
@@ -95,7 +97,8 @@ fun AddRecordScreen(
 private fun ShowScreenByRecordType(
     focusRequester: FocusRequester,
     recordType: RecordType,
-    onTimeAdjustButtonClicked: () -> Unit
+    onTimeAdjustButtonClicked: () -> Unit,
+    userInputTimeRecord: String?,
 ) {
     when (recordType) {
         RecordType.WEIGHT -> {
@@ -128,7 +131,8 @@ private fun ShowScreenByRecordType(
             AddTimeRecordScreen(
                 onAdjustButtonClicked = onTimeAdjustButtonClicked,
                 focusRequester = focusRequester,
-                modifier = Modifier
+                modifier = Modifier,
+                defaultText = userInputTimeRecord
             )
         }
 
@@ -173,7 +177,8 @@ private fun AddRecordScreenPreview() {
             focusRequester = FocusRequester(),
             onRequestFocus = {},
             onCancelButtonClicked = {},
-            onTimeAdjustButtonClicked = {}
+            onTimeAdjustButtonClicked = {},
+            userInputTimeRecord = null
         )
     }
 }
