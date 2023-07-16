@@ -98,7 +98,7 @@ private fun ShowScreenByRecordType(
     focusRequester: FocusRequester,
     recordType: RecordType,
     onTimeAdjustButtonClicked: () -> Unit,
-    userInputTimeRecord: String?,
+    userInputTimeRecord: String?
 ) {
     when (recordType) {
         RecordType.WEIGHT -> {
