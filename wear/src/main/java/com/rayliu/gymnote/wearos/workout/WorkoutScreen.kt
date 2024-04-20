@@ -48,7 +48,6 @@ fun WorkoutScreen(
     modifier: Modifier = Modifier
 ) {
     ScalingLazyColumn(
-        modifier =
         modifier.rotary(
             RotaryDefaults.scrollBehavior(scrollableState = listState),
             focusRequester = focusRequester

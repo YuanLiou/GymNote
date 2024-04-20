@@ -62,7 +62,6 @@ private fun WorkoutInfoList(
         .fillMaxWidth()
         .padding(bottom = 8.dp)
     ScalingLazyColumn(
-        modifier =
         modifier.rotary(
             scrollBehavior(scrollableState = listState),
             focusRequester = focusRequester
