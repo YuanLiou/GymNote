@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
+import androidx.wear.compose.foundation.rotary.RotaryDefaults
+import androidx.wear.compose.foundation.rotary.rotary
 import androidx.wear.compose.material.Text
-import com.google.android.horologist.annotations.ExperimentalHorologistApi
-import com.google.android.horologist.compose.rotaryinput.rotaryWithScroll
 import com.rayliu.commonmain.domain.model.DistanceTimeRecord
 import com.rayliu.commonmain.domain.model.Record
 import com.rayliu.commonmain.domain.model.SportRecordType
@@ -37,7 +37,6 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
-@OptIn(ExperimentalHorologistApi::class)
 @Composable
 fun WorkoutScreen(
     listState: ScalingLazyListState,
@@ -49,9 +48,11 @@ fun WorkoutScreen(
     modifier: Modifier = Modifier
 ) {
     ScalingLazyColumn(
-        modifier = modifier
-            .rotaryWithScroll(focusRequester, listState)
-            .fillMaxSize(),
+        modifier =
+        modifier.rotary(
+            RotaryDefaults.scrollBehavior(scrollableState = listState),
+            focusRequester = focusRequester
+        ).fillMaxSize(),
         autoCentering = AutoCenteringParams(itemIndex = 0),
         state = listState,
     ) {

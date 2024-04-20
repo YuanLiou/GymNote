@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.AutoCenteringParams
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
-import com.google.android.horologist.annotations.ExperimentalHorologistApi
-import com.google.android.horologist.compose.rotaryinput.rotaryWithScroll
+import androidx.wear.compose.foundation.rotary.RotaryDefaults.scrollBehavior
+import androidx.wear.compose.foundation.rotary.rotary
 import com.rayliu.commonmain.domain.model.SportRecordType
 import com.rayliu.commonmain.domain.model.WorkoutInfo
 import com.rayliu.gymnote.wearos.theme.GymNoteTheme
@@ -50,7 +50,6 @@ fun WorkoutListScreen(
     }
 }
 
-@OptIn(ExperimentalHorologistApi::class)
 @Composable
 private fun WorkoutInfoList(
     workoutInfos: ImmutableList<WorkoutInfo>,
@@ -63,7 +62,11 @@ private fun WorkoutInfoList(
         .fillMaxWidth()
         .padding(bottom = 8.dp)
     ScalingLazyColumn(
-        modifier = modifier.rotaryWithScroll(focusRequester, listState).fillMaxSize(),
+        modifier =
+        modifier.rotary(
+            scrollBehavior(scrollableState = listState),
+            focusRequester = focusRequester
+        ).fillMaxSize(),
         autoCentering = AutoCenteringParams(itemIndex = 0),
         state = listState
     ) {
