@@ -32,9 +32,10 @@ fun AddTimeRecordScreen(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
-        modifier = modifier
-            .fillMaxSize()
-            .focusRequester(focusRequester)
+        modifier =
+            modifier
+                .fillMaxSize()
+                .focusRequester(focusRequester)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

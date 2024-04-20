@@ -32,7 +32,6 @@ fun AddRecordActionsScreen(
                 title = "OK",
                 onItemClick = onOKButtonClicked,
                 modifier = Modifier.padding(vertical = 4.dp)
-
             )
             OptionItem(
                 title = "Cancel",

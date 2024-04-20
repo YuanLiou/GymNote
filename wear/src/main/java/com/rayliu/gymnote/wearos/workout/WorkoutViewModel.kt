@@ -17,7 +17,6 @@ class WorkoutViewModel(
     private val getWorkoutInfo: GetWorkoutInfo,
     private val getWorkoutRecords: GetSportRecords
 ) : ViewModel() {
-
     private val workoutId: Int = savedStateHandle[WORKOUT_ID_NAV_ARGUMENT] ?: -1
 
     val workoutRecords = getWorkoutRecords(workoutId)

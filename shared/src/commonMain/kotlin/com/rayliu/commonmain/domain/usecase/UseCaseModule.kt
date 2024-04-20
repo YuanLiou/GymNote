@@ -10,14 +10,11 @@ import org.koin.core.annotation.Module
 @Module
 @ComponentScan
 class UseCaseModule {
+    @Factory
+    fun provideGetSportCategory(categoryRepository: CategoryRepository) = GetSportCategory(categoryRepository::provideBasicCategories)
 
     @Factory
-    fun provideGetSportCategory(categoryRepository: CategoryRepository) =
-        GetSportCategory(categoryRepository::provideBasicCategories)
-
-    @Factory
-    fun provideGetWorkoutInfo(workoutInfoRepository: WorkoutInfoRepository) =
-        GetWorkoutInfo(workoutInfoRepository::getWorkoutInfo)
+    fun provideGetWorkoutInfo(workoutInfoRepository: WorkoutInfoRepository) = GetWorkoutInfo(workoutInfoRepository::getWorkoutInfo)
 
     @Factory
     fun provideInsertNewSportRecord(sportRecordRepository: SportRecordRepository) =

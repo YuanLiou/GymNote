@@ -16,14 +16,12 @@ class CategoryLocalDataSourceImpl(
     @Named("Default") private val defaultDispatcher: CoroutineDispatcher,
     appDatabase: AppDatabase
 ) : CategoryLocalDataSource {
-
     private val queries = appDatabase.categoryQueries
 
-    override suspend fun getCategoryById(id: Long): Category? = withContext(ioDispatcher) {
-        queries.getCategoryById(id).executeAsOneOrNull()
-    }
+    override suspend fun getCategoryById(id: Long): Category? =
+        withContext(ioDispatcher) {
+            queries.getCategoryById(id).executeAsOneOrNull()
+        }
 
-    override fun getCategories(): Flow<List<Category>> {
-        return queries.getAllCategories().asFlow().mapToList(defaultDispatcher)
-    }
+    override fun getCategories(): Flow<List<Category>> = queries.getAllCategories().asFlow().mapToList(defaultDispatcher)
 }

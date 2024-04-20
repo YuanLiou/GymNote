@@ -53,9 +53,10 @@ private fun CategoryList(
     onCategoryClicked: (SportCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val contentModifier = Modifier
-        .fillMaxWidth()
-        .padding(bottom = 8.dp)
+    val contentModifier =
+        Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
     ScalingLazyColumn(
         modifier.rotary(
             scrollBehavior(scrollableState = listState),
@@ -88,10 +89,11 @@ private fun CategoryList(
 private fun CategoryListScreenPreview() {
     GymNoteTheme {
         CategoryListScreen(
-            sportCategories = persistentListOf(
-                SportCategory(id = 4851, name = "Mitchell Dotson"),
-                SportCategory(id = 8975, name = "Madeline Randolph")
-            ),
+            sportCategories =
+                persistentListOf(
+                    SportCategory(id = 4851, name = "Mitchell Dotson"),
+                    SportCategory(id = 8975, name = "Madeline Randolph")
+                ),
             showLoadingScreen = false,
             listState = ScalingLazyListState(),
             focusRequester = FocusRequester(),

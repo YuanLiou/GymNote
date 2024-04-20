@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface WorkoutInfoRepository {
     suspend fun updateInitialDateIfNeeded(initialDate: String)
+
     suspend fun getWorkoutInfo(id: Int): WorkoutInfo?
+
     fun provideWorkoutInfos(categoryId: Int): Flow<ImmutableList<WorkoutInfo>>
 }

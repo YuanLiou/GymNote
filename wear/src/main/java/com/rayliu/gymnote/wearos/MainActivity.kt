@@ -7,7 +7,6 @@ import androidx.navigation.NavHostController
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 
 class MainActivity : ComponentActivity() {
-
     private lateinit var navController: NavHostController
 
     override fun onCreate(savedInstanceState: Bundle?) {

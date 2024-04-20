@@ -45,12 +45,13 @@ fun AddRecordScreen(
         modifier = modifier.fillMaxSize()
     ) {
         val pageCounts = recordTypes.size + 1
-        val state = rememberPagerState(
-            initialPage = 0,
-            initialPageOffsetFraction = 0f
-        ) {
-            pageCounts
-        }
+        val state =
+            rememberPagerState(
+                initialPage = 0,
+                initialPageOffsetFraction = 0f
+            ) {
+                pageCounts
+            }
 
         HorizontalPager(
             state = state,
@@ -86,9 +87,10 @@ fun AddRecordScreen(
         val pagerScreenState = remember { PageScreenIndicatorState(state) }
         HorizontalPageIndicator(
             pageIndicatorState = pagerScreenState,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 10.dp)
+            modifier =
+                Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 10.dp)
         )
     }
 }

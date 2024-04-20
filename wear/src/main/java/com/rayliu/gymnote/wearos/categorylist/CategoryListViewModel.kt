@@ -16,13 +16,13 @@ class CategoryListViewModel(
     getSportCategory: GetSportCategory,
     private val updateWorkoutInitialDate: UpdateWorkoutInitialDate
 ) : ViewModel() {
-
     val showProgress = mutableStateOf(false)
-    val categoryListState = getSportCategory().stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
-        initialValue = persistentListOf()
-    )
+    val categoryListState =
+        getSportCategory().stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = persistentListOf()
+        )
 
     fun performPreScreenTasks() {
         viewModelScope.launch {

@@ -15,12 +15,12 @@ class WorkoutListViewModel(
     savedStateHandle: SavedStateHandle,
     getWorkoutInfo: GetWorkoutInfos
 ) : ViewModel() {
-
     private val categoryId: Int = savedStateHandle[CATEGORY_ID_NAV_ARGUMENT] ?: -1
 
-    val workoutInfoState = getWorkoutInfo(categoryId).stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
-        initialValue = persistentListOf()
-    )
+    val workoutInfoState =
+        getWorkoutInfo(categoryId).stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = persistentListOf()
+        )
 }

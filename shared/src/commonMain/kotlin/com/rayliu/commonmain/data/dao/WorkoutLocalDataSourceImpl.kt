@@ -16,7 +16,6 @@ class WorkoutLocalDataSourceImpl(
     @Named("Default") private val defaultDispatcher: CoroutineDispatcher,
     appDatabase: AppDatabase
 ) : WorkoutLocalDataSource {
-
     private val queries = appDatabase.workoutQueries
 
     override suspend fun getWorkoutsByCategoryId(id: Long): List<Workout> =
@@ -24,19 +23,16 @@ class WorkoutLocalDataSourceImpl(
             queries.getWorkoutsByCategoryId(id).executeAsList()
         }
 
-    override suspend fun getWorkout(id: Long): Workout? {
-        return queries.getWorkoutById(id).executeAsOneOrNull()
-    }
+    override suspend fun getWorkout(id: Long): Workout? = queries.getWorkoutById(id).executeAsOneOrNull()
 
-    override suspend fun updateInitialDate(initialDate: String) = withContext(ioDispatcher) {
-        queries.updateInitalCreateDate(initialDate, initialDate)
-    }
+    override suspend fun updateInitialDate(initialDate: String) =
+        withContext(ioDispatcher) {
+            queries.updateInitalCreateDate(initialDate, initialDate)
+        }
 
-    override suspend fun getInitialGeneratedWorkoutCounts(): Int {
-        return queries.getInitialGenerateWorkoutCounts().executeAsOneOrNull()?.toInt() ?: 0
-    }
+    override suspend fun getInitialGeneratedWorkoutCounts(): Int =
+        queries.getInitialGenerateWorkoutCounts().executeAsOneOrNull()?.toInt() ?: 0
 
-    override fun getWorkoutsFlow(categoryId: Long): Flow<List<Workout>> {
-        return queries.getWorkoutsByCategoryId(categoryId).asFlow().mapToList(defaultDispatcher)
-    }
+    override fun getWorkoutsFlow(categoryId: Long): Flow<List<Workout>> =
+        queries.getWorkoutsByCategoryId(categoryId).asFlow().mapToList(defaultDispatcher)
 }

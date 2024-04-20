@@ -41,9 +41,10 @@ fun TimePickerScreen(
                 val secondText = "%02d".format(it.second)
                 onTimeConfirm("$hourText:$minuteText:$secondText")
             },
-            modifier = Modifier
-                .padding(6.dp)
-                .focusRequester(focusRequester)
+            modifier =
+                Modifier
+                    .padding(6.dp)
+                    .focusRequester(focusRequester)
         )
     }
 }

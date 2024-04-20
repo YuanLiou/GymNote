@@ -22,15 +22,13 @@ class WorkoutInfoRepositoryImpl(
         }
     }
 
-    override suspend fun getWorkoutInfo(id: Int): WorkoutInfo? {
-        return localDataSource.getWorkout(id.toLong())?.let {
+    override suspend fun getWorkoutInfo(id: Int): WorkoutInfo? =
+        localDataSource.getWorkout(id.toLong())?.let {
             workoutInfoMapper.map(it)
         }
-    }
 
-    override fun provideWorkoutInfos(categoryId: Int): Flow<ImmutableList<WorkoutInfo>> {
-        return localDataSource.getWorkoutsFlow(categoryId.toLong()).map {
+    override fun provideWorkoutInfos(categoryId: Int): Flow<ImmutableList<WorkoutInfo>> =
+        localDataSource.getWorkoutsFlow(categoryId.toLong()).map {
             workoutInfoListMapper.map(it).toImmutableList()
         }
-    }
 }

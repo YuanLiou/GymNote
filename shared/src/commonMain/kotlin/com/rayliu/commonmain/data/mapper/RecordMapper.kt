@@ -21,114 +21,132 @@ class RecordMapper(
     private val sportRecordTypeMapper: SportRecordTypeMapper,
     private val dateTimeConverter: DateTimeConverter
 ) : Mapper<RecordDetails, Record> {
-    override fun map(input: RecordDetails): Record {
-        return when (val type = sportRecordTypeMapper.map(input.sportRecordTypeId.toInt())) {
-            SportRecordType.WEIGHT_REPS -> WeightRepsRecord(
-                id = input.id.toInt(),
-                workoutId = input.workoutId.toInt(),
-                sportRecordType = type,
-                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
-                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
-                weight = input.weight?.toFloat() ?: 0f,
-                reps = input.reps?.toInt() ?: 0
-            )
-            SportRecordType.WEIGHT_TIME -> WeightTimeRecord(
-                id = input.id.toInt(),
-                workoutId = input.workoutId.toInt(),
-                sportRecordType = type,
-                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
-                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
-                weight = input.weight?.toFloat() ?: 0f,
-                time = input.time.orEmpty()
-            )
-            SportRecordType.DISTANCE_TIME -> DistanceTimeRecord(
-                id = input.id.toInt(),
-                workoutId = input.workoutId.toInt(),
-                sportRecordType = type,
-                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
-                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
-                distance = input.distance?.toFloat() ?: 0f,
-                time = input.time.orEmpty()
-            )
-            SportRecordType.WEIGHT -> WeightRecord(
-                id = input.id.toInt(),
-                workoutId = input.workoutId.toInt(),
-                sportRecordType = type,
-                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
-                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
-                weight = input.weight?.toFloat() ?: 0f
-            )
-            SportRecordType.REPS -> RepsRecord(
-                id = input.id.toInt(),
-                workoutId = input.workoutId.toInt(),
-                sportRecordType = type,
-                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
-                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
-                reps = input.reps?.toInt() ?: 0
-            )
-            SportRecordType.TIME -> TimeRecord(
-                id = input.id.toInt(),
-                workoutId = input.workoutId.toInt(),
-                sportRecordType = type,
-                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
-                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
-                time = input.time.orEmpty()
-            )
-            SportRecordType.DISTANCE -> DistanceRecord(
-                id = input.id.toInt(),
-                workoutId = input.workoutId.toInt(),
-                sportRecordType = type,
-                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
-                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
-                distance = input.distance?.toFloat() ?: 0f
-            )
-            else -> UnknownRecord(
-                id = input.id.toInt(),
-                workoutId = input.workoutId.toInt(),
-                sportRecordType = type,
-                createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
-                lastModified = dateTimeConverter.toLocalDateTime(input.lastModified)
-            )
+    override fun map(input: RecordDetails): Record =
+        when (val type = sportRecordTypeMapper.map(input.sportRecordTypeId.toInt())) {
+            SportRecordType.WEIGHT_REPS ->
+                WeightRepsRecord(
+                    id = input.id.toInt(),
+                    workoutId = input.workoutId.toInt(),
+                    sportRecordType = type,
+                    createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                    lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                    weight = input.weight?.toFloat() ?: 0f,
+                    reps = input.reps?.toInt() ?: 0
+                )
+
+            SportRecordType.WEIGHT_TIME ->
+                WeightTimeRecord(
+                    id = input.id.toInt(),
+                    workoutId = input.workoutId.toInt(),
+                    sportRecordType = type,
+                    createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                    lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                    weight = input.weight?.toFloat() ?: 0f,
+                    time = input.time.orEmpty()
+                )
+
+            SportRecordType.DISTANCE_TIME ->
+                DistanceTimeRecord(
+                    id = input.id.toInt(),
+                    workoutId = input.workoutId.toInt(),
+                    sportRecordType = type,
+                    createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                    lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                    distance = input.distance?.toFloat() ?: 0f,
+                    time = input.time.orEmpty()
+                )
+
+            SportRecordType.WEIGHT ->
+                WeightRecord(
+                    id = input.id.toInt(),
+                    workoutId = input.workoutId.toInt(),
+                    sportRecordType = type,
+                    createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                    lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                    weight = input.weight?.toFloat() ?: 0f
+                )
+
+            SportRecordType.REPS ->
+                RepsRecord(
+                    id = input.id.toInt(),
+                    workoutId = input.workoutId.toInt(),
+                    sportRecordType = type,
+                    createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                    lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                    reps = input.reps?.toInt() ?: 0
+                )
+
+            SportRecordType.TIME ->
+                TimeRecord(
+                    id = input.id.toInt(),
+                    workoutId = input.workoutId.toInt(),
+                    sportRecordType = type,
+                    createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                    lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                    time = input.time.orEmpty()
+                )
+
+            SportRecordType.DISTANCE ->
+                DistanceRecord(
+                    id = input.id.toInt(),
+                    workoutId = input.workoutId.toInt(),
+                    sportRecordType = type,
+                    createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                    lastModified = dateTimeConverter.toLocalDateTime(input.lastModified),
+                    distance = input.distance?.toFloat() ?: 0f
+                )
+
+            else ->
+                UnknownRecord(
+                    id = input.id.toInt(),
+                    workoutId = input.workoutId.toInt(),
+                    sportRecordType = type,
+                    createdAt = dateTimeConverter.toLocalDateTime(input.createAt),
+                    lastModified = dateTimeConverter.toLocalDateTime(input.lastModified)
+                )
         }
-    }
 }
 
 @Factory
 class RecordListMapper(
     private val mapper: RecordMapper
 ) : NullableInputListMapper<RecordDetails, Record> {
-    override fun map(input: List<RecordDetails>?): List<Record> {
-        return input?.map { mapper.map(it) }.orEmpty()
-    }
+    override fun map(input: List<RecordDetails>?): List<Record> = input?.map { mapper.map(it) }.orEmpty()
 }
 
 // Domain Object To DTO
 @Factory
 class RecordDetailsMapper : Mapper<Record, RecordDetails> {
     override fun map(input: Record): RecordDetails {
-        val weight = when (input) {
-            is WeightRepsRecord -> {
-                input.weight
-            }
-            is WeightTimeRecord -> {
-                input.weight
-            }
-            else -> {
-                null
-            }
-        }
+        val weight =
+            when (input) {
+                is WeightRepsRecord -> {
+                    input.weight
+                }
 
-        val time = when (input) {
-            is WeightTimeRecord -> {
-                input.time
+                is WeightTimeRecord -> {
+                    input.weight
+                }
+
+                else -> {
+                    null
+                }
             }
-            is DistanceTimeRecord -> {
-                input.time
+
+        val time =
+            when (input) {
+                is WeightTimeRecord -> {
+                    input.time
+                }
+
+                is DistanceTimeRecord -> {
+                    input.time
+                }
+
+                else -> {
+                    null
+                }
             }
-            else -> {
-                null
-            }
-        }
 
         return RecordDetails(
             id = input.id.toLong(),

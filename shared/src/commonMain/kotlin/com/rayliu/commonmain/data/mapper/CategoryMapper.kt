@@ -8,19 +8,16 @@ import org.koin.core.annotation.Factory
 
 @Factory
 class CategoryMapper : Mapper<Category, SportCategory> {
-    override fun map(input: Category): SportCategory {
-        return SportCategory(
+    override fun map(input: Category): SportCategory =
+        SportCategory(
             id = input.id.toInt(),
             name = input.name
         )
-    }
 }
 
 @Factory
 class CategoryListMapper(
     private val mapper: CategoryMapper
 ) : NullableInputListMapper<Category, SportCategory> {
-    override fun map(input: List<Category>?): List<SportCategory> {
-        return input?.map { mapper.map(it) }.orEmpty()
-    }
+    override fun map(input: List<Category>?): List<SportCategory> = input?.map { mapper.map(it) }.orEmpty()
 }

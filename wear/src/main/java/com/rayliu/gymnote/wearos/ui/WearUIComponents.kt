@@ -125,12 +125,14 @@ private fun WearButtonPreview() {
     GymNoteTheme {
         WearButton(
             onClick = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-            iconModifier = Modifier
-                .size(24.dp)
-                .wrapContentSize(align = Alignment.Center)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp),
+            iconModifier =
+                Modifier
+                    .size(24.dp)
+                    .wrapContentSize(align = Alignment.Center)
         )
     }
 }
@@ -153,12 +155,14 @@ private fun WearCardPreview() {
             message = "message",
             time = "time",
             onCardClicked = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-            iconModifier = Modifier
-                .size(24.dp)
-                .wrapContentSize(align = Alignment.Center)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp),
+            iconModifier =
+                Modifier
+                    .size(24.dp)
+                    .wrapContentSize(align = Alignment.Center)
         )
     }
 }

@@ -16,18 +16,20 @@ fun WearEditText(
     modifier: Modifier = Modifier,
     fontSize: TextUnit = TextUnit.Unspecified,
 ) {
-    val launchUserInputIntent = launchUserInputIntent(
-        text = text,
-        onUserInputText = onUserInputText
-    )
+    val launchUserInputIntent =
+        launchUserInputIntent(
+            text = text,
+            onUserInputText = onUserInputText
+        )
 
     Text(
         text = text,
         fontSize = fontSize,
-        modifier = modifier
-            .clickable {
-                launchUserInputIntent()
-            }
+        modifier =
+            modifier
+                .clickable {
+                    launchUserInputIntent()
+                }
     )
 }
 

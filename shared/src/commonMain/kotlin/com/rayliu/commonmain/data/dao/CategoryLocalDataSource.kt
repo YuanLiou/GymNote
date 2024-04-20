@@ -5,5 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface CategoryLocalDataSource {
     suspend fun getCategoryById(id: Long): Category?
+
     fun getCategories(): Flow<List<Category>>
 }

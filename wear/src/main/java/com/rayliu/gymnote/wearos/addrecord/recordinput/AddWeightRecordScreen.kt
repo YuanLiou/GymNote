@@ -46,11 +46,12 @@ fun AddWeightRecordScreen(
         val context = LocalContext.current
         val waringText = stringResource(id = R.string.warning_input_type_is_not_number)
 
-        val undoButtonVisibility = if (userInput != defaultText) {
-            1f
-        } else {
-            0f
-        }
+        val undoButtonVisibility =
+            if (userInput != defaultText) {
+                1f
+            } else {
+                0f
+            }
 
         Column(
             verticalArrangement = Arrangement.Center
