@@ -1,6 +1,6 @@
 [versions]
-agp = "8.0.2"
-kotlin = "1.8.22"
+agp = "8.2.2"
+kotlin = "1.9.23"
 core-ktx = "1.10.1"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
@@ -12,18 +12,18 @@ constraintlayout = "2.1.4"
 percentlayout = "1.0.0"
 legacy-support-v4 = "1.0.0"
 recyclerview = "1.3.0"
-compose-bom = "2023.06.01"
-wear-compose = "1.2.0-beta02"
+compose-bom = "2024.04.01"
+wear-compose = "1.3.1"
 lifecycle-runtime-ktx = "2.6.1"
-activity-compose = "1.7.2"
+activity-compose = "1.9.0"
 # https://github.com/google/ksp/releases
-ksp = "1.8.22-1.0.11"
+ksp = "1.9.23-1.0.20"
 horologist = "0.4.12"
 wear-input = "1.2.0-alpha02"
 
 # kotlinx
-collections-immutable = "0.3.5"
-datetime = "0.4.0"
+collections-immutable = "0.3.7"
+datetime = "0.5.0"
 
 # koin
 koin = "3.4.2"

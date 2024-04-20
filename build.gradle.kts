@@ -5,5 +5,6 @@ plugins {
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.ktlintKotlinter) apply false
+    alias(libs.plugins.sqlDelight) apply false
 }
 true // Needed to make the Suppress annotation work for the plugins block
