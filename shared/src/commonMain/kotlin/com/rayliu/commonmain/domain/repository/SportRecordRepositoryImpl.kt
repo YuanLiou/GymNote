@@ -16,11 +16,10 @@ class SportRecordRepositoryImpl(
     private val recordDetailsMapper: RecordDetailsMapper,
     private val recordListMapper: RecordListMapper
 ) : SportRecordRepository {
-    override fun getSportRecords(workoutInfoId: Int): Flow<ImmutableList<Record>> {
-        return workoutRecordDataSource.getWorkoutRecordDetails(workoutInfoId.toLong()).map {
+    override fun getSportRecords(workoutInfoId: Int): Flow<ImmutableList<Record>> =
+        workoutRecordDataSource.getWorkoutRecordDetails(workoutInfoId.toLong()).map {
             recordListMapper.map(it).toImmutableList()
         }
-    }
 
     override suspend fun insertNewRecord(record: Record) {
         workoutRecordDataSource.insertRecordDetails(recordDetailsMapper.map(record))

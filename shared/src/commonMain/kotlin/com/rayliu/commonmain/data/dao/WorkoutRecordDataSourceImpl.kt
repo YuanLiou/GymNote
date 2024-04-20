@@ -17,47 +17,44 @@ class WorkoutRecordDataSourceImpl(
     @Named("Default") private val defaultDispatcher: CoroutineDispatcher,
     appDatabase: AppDatabase
 ) : WorkoutRecordDataSource {
-
     private val detailsQueries = appDatabase.recordDetailsQueries
 
-    override fun getWorkoutRecordDetails(workoutId: Long): Flow<List<RecordDetails>> {
-        return detailsQueries.getRecordDetails(workoutId).asFlow().mapToList(defaultDispatcher)
-    }
+    override fun getWorkoutRecordDetails(workoutId: Long): Flow<List<RecordDetails>> =
+        detailsQueries.getRecordDetails(workoutId).asFlow().mapToList(defaultDispatcher)
 
-    override suspend fun insertRecordDetails(
-        recordDetails: RecordDetails
-    ) = withContext(ioDispatcher) {
-        detailsQueries.insertNewRecord(
-            id = null,
-            workoutId = recordDetails.workoutId,
-            createAt = recordDetails.createAt,
-            lastModified = recordDetails.createAt,
-            sportRecordTypeId = recordDetails.sportRecordTypeId,
-            weight = recordDetails.weight,
-            reps = recordDetails.reps,
-            time = recordDetails.time,
-            distance = recordDetails.distance
-        )
-    }
-
-    override suspend fun updateRecordDetails(
-        recordDetails: RecordDetails
-    ) = withContext(ioDispatcher) {
-        if (recordDetails.id == RECORD_EMPTY_ID.toLong()) {
-            return@withContext
+    override suspend fun insertRecordDetails(recordDetails: RecordDetails) =
+        withContext(ioDispatcher) {
+            detailsQueries.insertNewRecord(
+                id = null,
+                workoutId = recordDetails.workoutId,
+                createAt = recordDetails.createAt,
+                lastModified = recordDetails.createAt,
+                sportRecordTypeId = recordDetails.sportRecordTypeId,
+                weight = recordDetails.weight,
+                reps = recordDetails.reps,
+                time = recordDetails.time,
+                distance = recordDetails.distance
+            )
         }
 
-        detailsQueries.updateRecord(
-            id = recordDetails.id,
-            lastModified = recordDetails.lastModified,
-            weight = recordDetails.weight,
-            reps = recordDetails.reps,
-            time = recordDetails.time,
-            distance = recordDetails.distance
-        )
-    }
+    override suspend fun updateRecordDetails(recordDetails: RecordDetails) =
+        withContext(ioDispatcher) {
+            if (recordDetails.id == RECORD_EMPTY_ID.toLong()) {
+                return@withContext
+            }
 
-    override suspend fun deleteRecordDetails(id: Long) = withContext(ioDispatcher) {
-        detailsQueries.deleteRecord(id)
-    }
+            detailsQueries.updateRecord(
+                id = recordDetails.id,
+                lastModified = recordDetails.lastModified,
+                weight = recordDetails.weight,
+                reps = recordDetails.reps,
+                time = recordDetails.time,
+                distance = recordDetails.distance
+            )
+        }
+
+    override suspend fun deleteRecordDetails(id: Long) =
+        withContext(ioDispatcher) {
+            detailsQueries.deleteRecord(id)
+        }
 }

@@ -8,12 +8,13 @@ import com.rayliu.gymnote.wearos.di.WearModule
 import org.koin.dsl.module
 import org.koin.ksp.generated.module
 
-internal val appModule = module {
-    includes(
-        androidDispatcherModule +
-            WearModule().module +
-            RepositoryModule().module +
-            UseCaseModule().module +
-            androidDatabaseModule
-    )
-}
+internal val appModule =
+    module {
+        includes(
+            androidDispatcherModule +
+                WearModule().module +
+                RepositoryModule().module +
+                UseCaseModule().module +
+                androidDatabaseModule
+        )
+    }

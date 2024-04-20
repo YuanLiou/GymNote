@@ -17,7 +17,6 @@ class AddRecordViewModel(
     savedStateHandle: SavedStateHandle,
     private val getWorkoutInfo: GetWorkoutInfo
 ) : ViewModel() {
-
     private val workoutId: Int = savedStateHandle[WORKOUT_ID_NAV_ARGUMENT] ?: -1
 
     val recordInputTypes = mutableStateOf<ImmutableSet<RecordType>>(persistentSetOf())
@@ -30,24 +29,31 @@ class AddRecordViewModel(
                 SportRecordType.WEIGHT_REPS -> {
                     recordInputTypes.value = persistentSetOf(RecordType.WEIGHT, RecordType.REPS)
                 }
+
                 SportRecordType.WEIGHT_TIME -> {
                     recordInputTypes.value = persistentSetOf(RecordType.WEIGHT, RecordType.TIME)
                 }
+
                 SportRecordType.DISTANCE_TIME -> {
                     recordInputTypes.value = persistentSetOf(RecordType.DISTANCE, RecordType.TIME)
                 }
+
                 SportRecordType.WEIGHT -> {
                     recordInputTypes.value = persistentSetOf(RecordType.WEIGHT)
                 }
+
                 SportRecordType.REPS -> {
                     recordInputTypes.value = persistentSetOf(RecordType.REPS)
                 }
+
                 SportRecordType.TIME -> {
                     recordInputTypes.value = persistentSetOf(RecordType.TIME)
                 }
+
                 SportRecordType.DISTANCE -> {
                     recordInputTypes.value = persistentSetOf(RecordType.DISTANCE)
                 }
+
                 else -> {}
             }
         }

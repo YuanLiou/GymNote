@@ -13,13 +13,16 @@ import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 
 private const val SCROLL_STATE_KEY = "scrollState"
 
-class ScalingLazyListStateViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
-    val scrollState = savedStateHandle.saveable(
-        key = SCROLL_STATE_KEY,
-        saver = ScalingLazyListState.Saver
-    ) {
-        ScalingLazyListState()
-    }
+class ScalingLazyListStateViewModel(
+    savedStateHandle: SavedStateHandle
+) : ViewModel() {
+    val scrollState =
+        savedStateHandle.saveable(
+            key = SCROLL_STATE_KEY,
+            saver = ScalingLazyListState.Saver
+        ) {
+            ScalingLazyListState()
+        }
 }
 
 // Interop between SavedStateHandle and Compose Saver/SaveableStateRegistry

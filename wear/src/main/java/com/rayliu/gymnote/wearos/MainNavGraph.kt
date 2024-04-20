@@ -47,12 +47,13 @@ fun NavGraphBuilder.mainNavGraph(
 ) {
     composable(
         route = Screen.SportsCategory.route,
-        arguments = listOf(
-            navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
-                type = NavType.EnumType(DestinationScrollType::class.java)
-                defaultValue = DestinationScrollType.SCALING_LAZY_COLUMN_SCROLLING
-            }
-        )
+        arguments =
+            listOf(
+                navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
+                    type = NavType.EnumType(DestinationScrollType::class.java)
+                    defaultValue = DestinationScrollType.SCALING_LAZY_COLUMN_SCROLLING
+                }
+            )
     ) { entry ->
         val focusRequester = remember { FocusRequester() }
         val viewModel: CategoryListViewModel = koinNavViewModel()
@@ -77,17 +78,18 @@ fun NavGraphBuilder.mainNavGraph(
     }
     composable(
         route = Screen.WorkoutList.route + "/{$CATEGORY_ID_NAV_ARGUMENT}",
-        arguments = listOf(
-            navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
-                type = NavType.EnumType(DestinationScrollType::class.java)
-                defaultValue = DestinationScrollType.SCALING_LAZY_COLUMN_SCROLLING
-            },
-            navArgument(CATEGORY_ID_NAV_ARGUMENT) {
-                type = NavType.IntType
-                defaultValue = 0
-                nullable = false
-            }
-        )
+        arguments =
+            listOf(
+                navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
+                    type = NavType.EnumType(DestinationScrollType::class.java)
+                    defaultValue = DestinationScrollType.SCALING_LAZY_COLUMN_SCROLLING
+                },
+                navArgument(CATEGORY_ID_NAV_ARGUMENT) {
+                    type = NavType.IntType
+                    defaultValue = 0
+                    nullable = false
+                }
+            )
     ) { entry ->
         val scalingLazyListState = scalingLazyListState(entry)
         val focusRequester = remember { FocusRequester() }
@@ -108,17 +110,18 @@ fun NavGraphBuilder.mainNavGraph(
     }
     composable(
         route = Screen.Workout.route + "/{$WORKOUT_ID_NAV_ARGUMENT}",
-        arguments = listOf(
-            navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
-                type = NavType.EnumType(DestinationScrollType::class.java)
-                defaultValue = DestinationScrollType.SCALING_LAZY_COLUMN_SCROLLING
-            },
-            navArgument(WORKOUT_ID_NAV_ARGUMENT) {
-                type = NavType.IntType
-                defaultValue = 0
-                nullable = false
-            }
-        )
+        arguments =
+            listOf(
+                navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
+                    type = NavType.EnumType(DestinationScrollType::class.java)
+                    defaultValue = DestinationScrollType.SCALING_LAZY_COLUMN_SCROLLING
+                },
+                navArgument(WORKOUT_ID_NAV_ARGUMENT) {
+                    type = NavType.IntType
+                    defaultValue = 0
+                    nullable = false
+                }
+            )
     ) { entry ->
         val scalingLazyListState = scalingLazyListState(entry)
         val focusRequester = remember { FocusRequester() }
@@ -147,17 +150,18 @@ fun NavGraphBuilder.mainNavGraph(
     }
     composable(
         route = Screen.AddWorkoutRecord.route + "/{$WORKOUT_ID_NAV_ARGUMENT}",
-        arguments = listOf(
-            navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
-                type = NavType.EnumType(DestinationScrollType::class.java)
-                defaultValue = DestinationScrollType.NONE
-            },
-            navArgument(WORKOUT_ID_NAV_ARGUMENT) {
-                type = NavType.IntType
-                defaultValue = 0
-                nullable = false
-            }
-        )
+        arguments =
+            listOf(
+                navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
+                    type = NavType.EnumType(DestinationScrollType::class.java)
+                    defaultValue = DestinationScrollType.NONE
+                },
+                navArgument(WORKOUT_ID_NAV_ARGUMENT) {
+                    type = NavType.IntType
+                    defaultValue = 0
+                    nullable = false
+                }
+            )
     ) { entry ->
         val focusRequester = remember { FocusRequester() }
         val viewModel: AddRecordViewModel = koinNavViewModel()
@@ -187,19 +191,21 @@ fun NavGraphBuilder.mainNavGraph(
         )
     }
     composable(
-        route = Screen.TimePickerScreen.route +
-            "?$TIME_PICKER_NAV_ARGUMENT={$TIME_PICKER_NAV_ARGUMENT}",
-        arguments = listOf(
-            navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
-                type = NavType.EnumType(DestinationScrollType::class.java)
-                defaultValue = DestinationScrollType.NONE
-            },
-            navArgument(TIME_PICKER_NAV_ARGUMENT) {
-                type = NavType.StringType
-                defaultValue = DEFAULT_TIME_RECORD
-                nullable = true
-            }
-        )
+        route =
+            Screen.TimePickerScreen.route +
+                "?$TIME_PICKER_NAV_ARGUMENT={$TIME_PICKER_NAV_ARGUMENT}",
+        arguments =
+            listOf(
+                navArgument(SCROLL_TYPE_NAV_ARGUMENT) {
+                    type = NavType.EnumType(DestinationScrollType::class.java)
+                    defaultValue = DestinationScrollType.NONE
+                },
+                navArgument(TIME_PICKER_NAV_ARGUMENT) {
+                    type = NavType.StringType
+                    defaultValue = DEFAULT_TIME_RECORD
+                    nullable = true
+                }
+            )
     ) { entry ->
         val focusRequester = remember { FocusRequester() }
         val defaultTime = entry.arguments?.getString(TIME_PICKER_NAV_ARGUMENT)
@@ -220,9 +226,7 @@ fun NavGraphBuilder.mainNavGraph(
 
 @SuppressLint("ComposeViewModelInjection")
 @Composable
-fun scalingLazyListState(
-    navBackStackEntry: NavBackStackEntry
-): ScalingLazyListState {
+fun scalingLazyListState(navBackStackEntry: NavBackStackEntry): ScalingLazyListState {
     val passedScrollType = navBackStackEntry.arguments?.getSerializable(SCROLL_TYPE_NAV_ARGUMENT)
     check(
         passedScrollType == DestinationScrollType.SCALING_LAZY_COLUMN_SCROLLING

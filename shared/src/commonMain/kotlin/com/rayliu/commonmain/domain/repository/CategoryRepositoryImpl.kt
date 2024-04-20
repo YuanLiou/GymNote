@@ -14,9 +14,8 @@ class CategoryRepositoryImpl(
     private val localDataSource: CategoryLocalDataSource,
     private val categoryListMapper: CategoryListMapper
 ) : CategoryRepository {
-    override fun provideBasicCategories(): Flow<ImmutableList<SportCategory>> {
-        return localDataSource.getCategories().map {
+    override fun provideBasicCategories(): Flow<ImmutableList<SportCategory>> =
+        localDataSource.getCategories().map {
             categoryListMapper.map(it).toImmutableList()
         }
-    }
 }

@@ -15,25 +15,27 @@ fun launchUserInputIntent(
 ): () -> Unit {
     val inputTextKey = "input-text"
 
-    val remoteInputs = listOf(
-        RemoteInput.Builder(inputTextKey)
-            .setLabel(text)
-            .wearableExtender {
-                setEmojisAllowed(false)
-                setInputActionType(EditorInfo.IME_ACTION_DONE)
-            }
-            .build()
-    )
+    val remoteInputs =
+        listOf(
+            RemoteInput.Builder(inputTextKey)
+                .setLabel(text)
+                .wearableExtender {
+                    setEmojisAllowed(false)
+                    setInputActionType(EditorInfo.IME_ACTION_DONE)
+                }
+                .build()
+        )
 
-    val launcher = rememberLauncherForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        it.data?.let { intent ->
-            val result = RemoteInput.getResultsFromIntent(intent)
-            val userInputText = result.getCharSequence(inputTextKey)
-            onUserInputText(userInputText)
+    val launcher =
+        rememberLauncherForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            it.data?.let { intent ->
+                val result = RemoteInput.getResultsFromIntent(intent)
+                val userInputText = result.getCharSequence(inputTextKey)
+                onUserInputText(userInputText)
+            }
         }
-    }
 
     val intent = RemoteInputIntentHelper.createActionRemoteInputIntent()
     RemoteInputIntentHelper.putRemoteInputsExtra(intent, remoteInputs)

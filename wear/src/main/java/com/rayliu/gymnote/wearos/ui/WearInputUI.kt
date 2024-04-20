@@ -35,18 +35,19 @@ fun ValueInput(
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .onRotaryInputAccumulatedWithFocus(
-                focusRequester = focusRequester,
-                isLowRes = true // bazel device is low res
-            ) {
-                val accumulatedValue = it.roundToInt()
-                if (accumulatedValue > 0) {
-                    onUserClickPlusButton(currentInput)
-                } else if (accumulatedValue < 0) {
-                    onUserClickMinorButton(currentInput)
+        modifier =
+            modifier
+                .onRotaryInputAccumulatedWithFocus(
+                    focusRequester = focusRequester,
+                    isLowRes = true // bazel device is low res
+                ) {
+                    val accumulatedValue = it.roundToInt()
+                    if (accumulatedValue > 0) {
+                        onUserClickPlusButton(currentInput)
+                    } else if (accumulatedValue < 0) {
+                        onUserClickMinorButton(currentInput)
+                    }
                 }
-            }
     ) {
         CompactButton(
             onClick = { onUserClickPlusButton(currentInput) },

@@ -58,9 +58,10 @@ private fun WorkoutInfoList(
     onWorkoutClicked: (WorkoutInfo) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val contentModifier = Modifier
-        .fillMaxWidth()
-        .padding(bottom = 8.dp)
+    val contentModifier =
+        Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
     ScalingLazyColumn(
         modifier.rotary(
             scrollBehavior(scrollableState = listState),
@@ -93,26 +94,29 @@ private fun WorkoutInfoList(
 private fun WorkoutListScreenPreview() {
     GymNoteTheme {
         WorkoutListScreen(
-            workoutInfos = persistentListOf(
-                WorkoutInfo(
-                    id = 6278,
-                    name = "Odessa Huber",
-                    categoryId = 4839,
-                    sportRecordType = SportRecordType.WEIGHT_REPS,
-                    createdAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
-                    lastModified = Clock.System.now()
-                        .toLocalDateTime(TimeZone.currentSystemDefault())
+            workoutInfos =
+                persistentListOf(
+                    WorkoutInfo(
+                        id = 6278,
+                        name = "Odessa Huber",
+                        categoryId = 4839,
+                        sportRecordType = SportRecordType.WEIGHT_REPS,
+                        createdAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
+                        lastModified =
+                            Clock.System.now()
+                                .toLocalDateTime(TimeZone.currentSystemDefault())
+                    ),
+                    WorkoutInfo(
+                        id = 4784,
+                        name = "Blanca Willis",
+                        categoryId = 7617,
+                        sportRecordType = SportRecordType.WEIGHT_REPS,
+                        createdAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
+                        lastModified =
+                            Clock.System.now()
+                                .toLocalDateTime(TimeZone.currentSystemDefault())
+                    )
                 ),
-                WorkoutInfo(
-                    id = 4784,
-                    name = "Blanca Willis",
-                    categoryId = 7617,
-                    sportRecordType = SportRecordType.WEIGHT_REPS,
-                    createdAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
-                    lastModified = Clock.System.now()
-                        .toLocalDateTime(TimeZone.currentSystemDefault())
-                )
-            ),
             onWorkoutClicked = {},
             listState = ScalingLazyListState(),
             focusRequester = FocusRequester()

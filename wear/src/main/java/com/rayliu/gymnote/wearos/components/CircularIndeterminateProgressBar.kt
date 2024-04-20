@@ -19,8 +19,9 @@ fun CircularIndeterminateProgressBar(
 ) {
     if (isDisplayed) {
         Row(
-            modifier = modifier
-                .fillMaxSize(),
+            modifier =
+                modifier
+                    .fillMaxSize(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {

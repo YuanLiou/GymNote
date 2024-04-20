@@ -7,20 +7,11 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
 class DateTimeConverter {
+    fun provideCurrentMoment(): LocalDateTime = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
-    fun provideCurrentMoment(): LocalDateTime {
-        return Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-    }
+    fun provideNowTimeStamps(): String = toDatabaseDateTime(Clock.System.now())
 
-    fun provideNowTimeStamps(): String {
-        return toDatabaseDateTime(Clock.System.now())
-    }
+    fun toDatabaseDateTime(dateTime: Instant): String = dateTime.toString()
 
-    fun toDatabaseDateTime(dateTime: Instant): String {
-        return dateTime.toString()
-    }
-
-    fun toLocalDateTime(timeStamps: String): LocalDateTime {
-        return Instant.parse(timeStamps).toLocalDateTime(TimeZone.currentSystemDefault())
-    }
+    fun toLocalDateTime(timeStamps: String): LocalDateTime = Instant.parse(timeStamps).toLocalDateTime(TimeZone.currentSystemDefault())
 }

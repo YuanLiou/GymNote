@@ -1,6 +1,8 @@
 package com.rayliu.commonmain.domain.model
 
-enum class SportRecordType(val id: Int) {
+enum class SportRecordType(
+    val id: Int
+) {
     WEIGHT_REPS(0),
     WEIGHT_TIME(1),
     DISTANCE_TIME(2),

@@ -59,9 +59,10 @@ fun WorkoutScreen(
             workoutInfo?.let {
                 WearButton(
                     onClick = { onAddButtonClicked(it) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 8.dp)
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp)
                 )
             }
         }
@@ -69,10 +70,11 @@ fun WorkoutScreen(
             Text(
                 workoutInfo?.name.orEmpty(),
                 textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentSize(Alignment.Center)
-                    .padding(bottom = 12.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .wrapContentSize(Alignment.Center)
+                        .padding(bottom = 12.dp),
             )
         }
 
@@ -100,6 +102,7 @@ private fun ShowRecordCards(
             }
         )
     }
+
     is DistanceTimeRecord -> {
         WearCard(
             cardTitle = stringResource(id = R.string.workout_record_km, record.distance.toString()),
@@ -111,6 +114,7 @@ private fun ShowRecordCards(
             }
         )
     }
+
     is WeightTimeRecord -> {
         WearCard(
             cardTitle = stringResource(id = R.string.workout_record_kg, record.weight.toString()),
@@ -122,6 +126,7 @@ private fun ShowRecordCards(
             }
         )
     }
+
     else -> {
         // no-cards-display
     }
@@ -140,14 +145,15 @@ private fun WorkoutListScreenPreview() {
         WorkoutScreen(
             listState = ScalingLazyListState(),
             focusRequester = FocusRequester(),
-            workoutInfo = WorkoutInfo(
-                id = 5108,
-                name = "Shannon Dominguez",
-                categoryId = 5955,
-                sportRecordType = SportRecordType.UNKNOWN,
-                createdAt = now,
-                lastModified = now
-            ),
+            workoutInfo =
+                WorkoutInfo(
+                    id = 5108,
+                    name = "Shannon Dominguez",
+                    categoryId = 5955,
+                    sportRecordType = SportRecordType.UNKNOWN,
+                    createdAt = now,
+                    lastModified = now
+                ),
             records = listOf<Record>().toImmutableList(),
             onAddButtonClicked = {},
             onCardClicked = {},

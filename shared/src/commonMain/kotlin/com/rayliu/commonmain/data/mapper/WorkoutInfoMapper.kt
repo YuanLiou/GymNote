@@ -19,10 +19,12 @@ class WorkoutInfoMapper(
             name = input.name,
             categoryId = input.categoryId.toInt(),
             sportRecordType = sportRecordTypeMapper.map(input.sportRecordTypeId.toInt()),
-            createdAt = input.createAt?.run { dateTimeConverter.toLocalDateTime(this) }
-                ?: currentMoment,
-            lastModified = input.lastModified?.run { dateTimeConverter.toLocalDateTime(this) }
-                ?: currentMoment
+            createdAt =
+                input.createAt?.run { dateTimeConverter.toLocalDateTime(this) }
+                    ?: currentMoment,
+            lastModified =
+                input.lastModified?.run { dateTimeConverter.toLocalDateTime(this) }
+                    ?: currentMoment
         )
     }
 }
@@ -31,7 +33,5 @@ class WorkoutInfoMapper(
 class WorkoutInfoListMapper(
     private val mapper: WorkoutInfoMapper
 ) : NullableInputListMapper<Workout, WorkoutInfo> {
-    override fun map(input: List<Workout>?): List<WorkoutInfo> {
-        return input?.map { mapper.map(it) }.orEmpty()
-    }
+    override fun map(input: List<Workout>?): List<WorkoutInfo> = input?.map { mapper.map(it) }.orEmpty()
 }

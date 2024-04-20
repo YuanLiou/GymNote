@@ -7,14 +7,9 @@ import org.koin.core.annotation.Single
 
 @Module
 class DatabaseModule {
-
     @Single
-    fun provideAppDatabase(sqlDriver: SqlDriver): AppDatabase {
-        return AppDatabase(sqlDriver)
-    }
+    fun provideAppDatabase(sqlDriver: SqlDriver): AppDatabase = AppDatabase(sqlDriver)
 
     @Factory
-    fun provideDateTimeConverter(): DateTimeConverter {
-        return DateTimeConverter()
-    }
+    fun provideDateTimeConverter(): DateTimeConverter = DateTimeConverter()
 }

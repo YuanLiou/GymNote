@@ -5,11 +5,12 @@ import kotlinx.coroutines.Dispatchers
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-val dispatcherModule = module {
-    factory<CoroutineDispatcher>(named("IO")) {
-        Dispatchers.IO
+val dispatcherModule =
+    module {
+        factory<CoroutineDispatcher>(named("IO")) {
+            Dispatchers.IO
+        }
+        factory<CoroutineDispatcher>(named("Default")) {
+            Dispatchers.Default
+        }
     }
-    factory<CoroutineDispatcher>(named("Default")) {
-        Dispatchers.Default
-    }
-}
